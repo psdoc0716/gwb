@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>古物帮 - 说明书</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Saira:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300i,400,400i,600,600i,700&display=swap" rel="stylesheet">
+    <!-- /Fonts -->
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- /Styles -->
+    <link rel="icon" type="image/svg+xml" href="img/logo/logo-2.svg">
+    <!-- Font Awesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Remix Icon CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#333333',
+                        light: '#FFFFFF'
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .card-hover {
+                transition: transform 0.2s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-3px);
+            }
+        }
+    </style>
+    <style>
+        :root {
+            --bg-color: #f9fafb;
+            --text-color: #111827;
+            --panel-bg: #f3f4f6;
+            --border-color: #d1d5db;
+            --hover-color: #e5e7eb;
+            --input-bg: #ffffff;
+        }
+        .theme-white {
+            --bg-color: #f9fafb;
+            --text-color: #111827;
+            --panel-bg: #f3f4f6;
+            --border-color: #d1d5db;
+            --hover-color: #e5e7eb;
+            --input-bg: #ffffff;
+        }
+        .theme-black {
+            --bg-color: #000000;
+            --text-color: #F0F0F0;
+            --panel-bg: #121212;
+            --border-color: #222222;
+            --hover-color: #333333;
+            --input-bg: #121212;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        /* 增加页眉与下方内容的间距 */
+        #header-bar {
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 1023px) {
+            #header-bar {
+                margin-bottom: 1.5rem;
+            }
+        }
+        @media (max-width: 1023px) {
+            #header-bar {
+                position: fixed !important;
+                top: 0; left: 0; width: 100%; z-index: 50;
+            }
+            .main-layout {
+                padding-top: 56px !important;
+            }
+            .mobile-toc-btn {
+                top: 0 !important;
+                bottom: 0 !important;
+                margin-top: auto !important;
+                margin-bottom: auto !important;
+                height: 40px !important;
+                width: 40px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 9999px !important;
+                background: var(--panel-bg) !important;
+                transition: background 0.2s;
+            }
+            .mobile-toc-btn:hover {
+                background: var(--hover-color) !important;
+            }
+        }
+        @media (min-width: 1024px) {
+            .toc-float {
+                position: sticky !important;
+                top: 40px;
+                left: 0;
+                width: 280px;
+                min-width: 220px;
+                max-width: 340px;
+                height: auto;
+                max-height: calc(100vh - 60px);
+                overflow-y: auto;
+                display: block !important;
+                margin-right: 2.5rem;
+                box-shadow: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                max-width: 100%;
+            }
+            .mobile-toc-btn {
+                display: none !important;
+            }
+            .main-layout {
+                max-width: 90vw;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                padding-top: 0 !important;
+            }
+        }
+        @media (min-width: 1280px) {
+            .main-layout {
+                max-width: 1200px;
+            }
+            .main-content {
+                max-width: 900px;
+            }
+        }
+        @media (max-width: 1023px) {
+            .toc-float {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+            .main-layout {
+                flex-direction: column;
+                max-width: 100vw;
+            }
+            .mobile-toc-btn {
+                display: flex !important;
+            }
+        }
+        .toc-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 70vw;
+            max-width: 240px;
+            height: 100vh;
+            background: var(--panel-bg);
+            z-index: 100;
+            box-shadow: 2px 0 16px 0 rgba(0,0,0,0.10);
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+            border-right: 2px solid var(--border-color);
+        }
+        .toc-drawer.open {
+            transform: translateX(0);
+        }
+        .toc-backdrop {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.25);
+            z-index: 90;
+            display: none;
+        }
+        .toc-backdrop.open {
+            display: block;
+        }
+        @media (max-width: 1023px) {
+            .example {
+                display: none !important;
+            }
+        }
+        .scroll-mt-center {
+            scroll-margin-top: 40vh;
+        }
+        /* 去除所有阴影效果 */
+        [class*="shadow"],
+        [style*="box-shadow"],
+        .shadow,
+        .card-hover,
+        .main-content > section,
+        .example {
+            box-shadow: none !important;
+            text-shadow: none !important;
+        }
+    </style>
+    <style>
+        .kobe_topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: #4D0101;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .kobe_wrap_all {
+            padding-top: 122px;
+        }
+        @media (max-width: 900px) {
+            .kobe_wrap_all {
+                padding-top: 114px;
+            }
+            #mobile-menu-trigger {
+                display: flex !important;
+            }
+            .logo {
+                justify-content: center !important;
+            }
+        }
+    </style>
+    <style>
+        .toc-float {
+            margin-top: 100px !important;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            width: 260px;
+            z-index: 900;
+            background: none;
+            box-shadow: none;
+            border: none;
+            height: auto;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        @media (max-width: 1023px) {
+            .toc-float {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0 !important;
+                max-width: 100% !important;
+            }
+        }
+        .main-content {
+            margin-left: 280px;
+            max-width: calc(100% - 280px);
+            transition: margin-left 0.2s;
+        }
+        @media (max-width: 1280px) {
+            .main-content {
+                margin-left: 220px;
+                max-width: calc(100% - 220px);
+            }
+            .toc-float {
+                width: 200px;
+            }
+        }
+    </style>
+    <style>
+        .toc-float a { color: #888; font-weight: normal; transition: color 0.2s; }
+        .toc-float a.active { color: #111; font-weight: bold; }
+        /* 黑色主题下目录颜色调整 */
+        .theme-black .toc-float a { color: #bbb !important; }
+        .theme-black .toc-float a.active { color: #fff !important; }
+        /* 小轮播图圆角 */
+        .carousel-image,
+        .carousel-image-setup,
+        .carousel-image-artifacts {
+            border-radius: 0.75rem;
+        }
+    </style>
+    <style>
+        /* 响应式优化：移动端内容区块宽度100%，FAQ、轮播图、目录等不被遮挡 */
+        @media (max-width: 80%) {
+            .main-layout, .main-content, .toc-float, .panel-section, .card-hover, .rounded-2xl, .shadow, .ring-1,
+            .main-content > section, .main-content > div, .main-content > .panel-section, #faq, .example {
+                max-width: 80vw !important;
+                width: 80vw !important;
+                border-radius: 0.75rem !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                box-sizing: border-box;
+                padding-left: 10vw !important;
+                padding-right: 10vw !important;
+            }
+            .carousel-container {
+                height: 180px !important;
+            }
+            .example {
+                font-size: 1em !important;
+                /* 保持与主内容一致的padding */
+            }
+            h2, h3 {
+                font-size: 1em !important;
+            }
+            .toc-float {
+                display: none !important;
+            }
+        }
+    </style>
+    <style>
+        @media (max-width: 600px) {
+            .hide-on-mobile { display: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans" style="background-color:var(--bg-color);color:var(--text-color);">
+    <!-- Wrapper All -->
+    <div class="kobe_wrap_all">
+        <div style="font-size:0.8em;color:#888;text-align:center;padding:0px 0 30px 0;background:transparent;letter-spacing:0.5px;">
+            游戏世界观为架空虚拟，所有设定及玩法均为增加或辅助游戏乐趣，不贴合现实，如有雷同纯属巧合。
+        </div>
+        <!-- Topbar -->
+        <div class="kobe_topbar">
+            <div class="mainpart">
+                <div class="container">
+                    <div class="inner" style="display: flex; align-items: center; justify-content: space-between;">
+                        <!-- 移动端三横杠菜单按钮，左侧显示，仅移动端显示 -->
+                        <!-- 已删除汉堡按钮及相关样式 -->
+                        <!-- LOGO PC端左对齐，移动端居中对齐 -->
+                        <div class="logo" style="order: 1; display: flex; align-items: center; width: 100%; justify-content: flex-start;">
+                            <a href="index.html"><img src="img/logo/logo.svg" alt="" style="width:120px; height: auto;" /></a>
+                        </div>
+                        <div class="theme-switcher" style="order:3; display:flex; gap:8px; align-items:center; margin-left:16px;">
+                            <button id="theme-toggle" title="切换主题" style="width:32px;height:32px;border-radius:50%;border:none;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all 0.2s;">
+                                <i id="theme-toggle-icon" class="ri-sun-line"></i>
+                            </button>
+                        </div>
+                        <style>
+                        @media (max-width: 900px) {
+                            .logo {
+                                justify-content: center !important;
+                            }
+                        }
+                        </style>
+                        <!-- 桌面端菜单，移动端隐藏 -->
+                        <div class="menu" style="order: 2;">
+                            <ul style="display: flex; flex-direction: row; gap: 32px; white-space: nowrap; margin: 0; padding: 0; list-style: none;">
+                                <li><a href="index.html" onclick="window.location.href='index.html'; return false;">首页</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Dropdown -->
+            <div class="dropdown" style="text-align: center;">
+                <div class="container">
+                    <div class="main">
+                        <ul style="display: inline-block; text-align: left;">
+                            <li style="text-align: center;"><a href="index.html">首页</a></li>
+                            <li style="text-align: center;"><a href="manual.html" style="font-weight:bold;color:#ff4d4f;">说明书</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /Dropdown -->
+        </div>
+        <!-- /Topbar -->
+        <!-- 说明书主体内容区（保留原有main-layout和目录结构） -->
+        <div class="main-layout container mx-auto px-2 sm:px-6 py-8 flex flex-row relative">
+            <!-- 桌面端左侧固定目录（sticky） -->
+            <div class="toc-float" style="background:none;border:none;box-shadow:none;padding:0;margin-bottom:32px;">
+                <h2 class="text-xl sm:text-2xl font-bold mb-4 tracking-wide" style="color:var(--text-color);background:none;border:none;">目录</h2>
+                <ul class="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 text-base" style="background:none;border:none;">
+                    <li class="mb-2"><a id="toc-intro" href="#intro" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏背景</a></li>
+                    <li class="mb-2"><a id="toc-accessories" href="#accessories" class="hover:underline font-semibold py-1 inline-block" style="background:none;">卡牌构成</a></li>
+                    <li class="mb-2"><a id="toc-setup" href="#setup" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏初期设置</a></li>
+                    <li class="mb-2"><a id="toc-flow" href="#flow" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏流程</a></li>
+                    <li class="mb-2"><a id="toc-features" href="#features" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏特色</a></li>
+                    <li class="mb-2"><a id="toc-end" href="#end" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏结束条件</a></li>
+                    <li class="mb-2"><a id="toc-artifacts" href="#artifacts" class="hover:underline font-semibold py-1 inline-block" style="background:none;">古物牌种类</a></li>
+                    <li class="mb-2"><a id="toc-scoring" href="#scoring" class="hover:underline font-semibold py-1 inline-block" style="background:none;">积分结算规则</a></li>
+                    <li class="mb-2"><a id="toc-terms" href="#terms" class="hover:underline font-semibold py-1 inline-block" style="background:none;">名词解释</a></li>
+                    <li class="mb-2"><a id="toc-areas" href="#areas" class="hover:underline font-semibold py-1 inline-block" style="background:none;">区域说明</a></li>
+                    <li class="mb-2"><a id="toc-faq" href="#faq" class="hover:underline font-semibold py-1 inline-block" style="background:none;">常见问题与解答</a></li>
+                </ul>
+            </div>
+            <!-- 主内容区 -->
+            <div class="main-content flex-1" style="color:var(--text-color);">
+                <section id="intro" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3 scroll-mt-center" style="color:var(--text-color);"><i class="ri-information-line mr-2"></i>游戏背景</h2>
+                    <p class="mb-3">古物帮的帮主经常为博物馆找寻并捐献流失在外头的古物，如今帮主即将退休卸任，下一任的帮主将在你们当中产生。</p>
+                    <p class="mb-3">帮主：各位优秀的古物帮成员，或许你们之前从事各行各业，而如今我希望你们能通过各自擅长的能力去找回流失在外界的众多古物。最终我会将帮主之位继承给其中最优秀的那位！</p>
+                    <p class="mb-3">每一个进入公示区内的古物在游戏结束后都会捐赠给博物馆，而博物馆将会根据古物的能力和排列顺序计算你的最终得分。</p>
+                </section>
+                <section id="accessories" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-full md:h-full">
+                            <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-stack-line mr-2"></i>卡牌构成</h2>
+                            <ul class="list-disc pl-6 mb-4" style="line-height: auto; ">
+                                <li>职业牌：15张</li>
+                                <li>先行令：1张</li>
+                                <li>鉴定牌：10张</li>
+                                <li>稽查牌：10张</li>
+                                <li>古物牌：83张</li>
+                                <li>工具牌-辅助：50张</li>
+                                <li>工具牌-技能：57张</li>
+                                <li style="color: #aaa; display: flex; align-items: center; font-size: 0.92em; list-style: none;">
+                                    点击右侧图片可查看卡牌介绍
+                                </li>
+                            </ul>
+                            </ul>
+                        </div>
+                        <div class="w-full md:h-full">
+                            <!-- 轮播容器 -->
+                            <div class="relative" id="image-carousel">
+                                <!-- 轮播图片容器 -->
+                                <div class="carousel-container overflow-hidden rounded relative group" style="height: 242px; position: relative;">
+                                    <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-20 select-none" style="white-space:nowrap;">点击查看大图</span>
+                                    <div class="absolute inset-0 transition bg-black/0 group-hover:bg-black/40 z-10 pointer-events-none"></div>
+                                    <img src="img/卡牌介绍/卡牌介绍 - 1.png" alt="卡牌介绍1" class="carousel-image absolute inset-0 w-full h-full object-contain transition-opacity duration-500" data-index="0">
+                                    <img src="img/卡牌介绍/卡牌介绍 - 2.png" alt="卡牌介绍2" class="carousel-image absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" data-index="1">
+                                    <img src="img/卡牌介绍/卡牌介绍 - 3.png" alt="卡牌介绍3" class="carousel-image absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" data-index="2">
+                                    <img src="img/卡牌介绍/卡牌介绍 - 4.png" alt="卡牌介绍4" class="carousel-image absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" data-index="3">
+                                    <img src="img/卡牌介绍/卡牌介绍 - 5.png" alt="卡牌介绍5" class="carousel-image absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" data-index="4">
+                                </div>
+                                <!-- 轮播控制按钮 -->
+                                <!-- <button class="carousel-prev absolute top-1/2 left-2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors" aria-label="上一张">
+                                    <i class="fa fa-chevron-left"></i>
+                                </button>
+                                <button class="carousel-next absolute top-1/2 right-2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors" aria-label="下一张">
+                                    <i class="fa fa-chevron-right"></i>
+                                </button> -->
+                                <!-- 轮播指示器 -->
+                                <!-- <div class="carousel-indicators flex justify-center gap-2 mt-3">
+                                    <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
+                                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
+                                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
+                                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="3"></button>
+                                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="4"></button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="setup" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="w-full md:h-full">
+                            <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-settings-3-line mr-2"></i>游戏初期设置</h2>
+                            <ol class="list-decimal pl-6 mb-4" style="line-height: 1.5; margin-bottom: 1.5em;">
+                                <li style="margin-bottom: 1em;">将所有古物牌与工具牌洗混后大致平分为两叠牌，一叠作为市场牌，另一叠为古墓牌。</li>
+                                <li style="margin-bottom: 1em;">将先行令与场上玩家数量-1张职业牌洗混后供玩家抽取。抽到先行令的作为本局的首位玩家，然后该玩家再从剩余职业牌中抽取一张本局游戏使用的职业牌。例如：有4名玩家，则抽取先行令和3张职业牌。</li>
+                                <li style="margin-bottom: 1em;">政策牌和鉴定牌洗混后无需操作，放置一旁。</li>
+                            </ol>
+                        </div>
+                        <div class="w-full md:h-full">
+                            <!-- 轮播容器（复制自卡牌构成区域） -->
+                            <div class="relative" id="image-carousel-setup">
+                                <div class="carousel-container overflow-hidden rounded relative group" style="height: 242px; position: relative;">
+                                    <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-20 select-none" style="white-space:nowrap;">点击查看大图</span>
+                                    <div class="absolute inset-0 transition bg-black/0 group-hover:bg-black/40 z-10 pointer-events-none"></div>
+                                    <img src="img/卡牌介绍/布局座次.png" alt="布局座次" class="carousel-image-setup absolute inset-0 w-full h-full object-contain transition-opacity duration-500" data-index="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="flow" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-shuffle-line mr-2"></i>游戏流程</h2>
+                    <p>先由首位玩家开始第一个玩家回合，在玩家回合内根据以下步骤依次进行：</p>
+                    <ol class="list-decimal pl-6 mb-4 space-y-2">
+                        <li>
+                            <strong>排序阶段</strong>：调整公示区内古物牌的顺序。
+                        </li>
+                        <li>
+                            <strong>激活阶段</strong>：从左至右依次触发本轮古物技能。
+                        </li>
+                        <li>
+                            <strong>行动阶段</strong>以下选项可供选择：
+                            <ul class="list-disc pl-6 mb-2 space-y-1">
+                                <li>消耗1行动力：进入市场</li>
+                                <li>消耗1行动力：进入鉴定机构</li>
+                                <li>消耗3行动力：进入古墓</li>
+                                <li>打出技能牌并消耗对应的行动力</li>
+                                <li>消耗3行动力：跳过（结束行动阶段，下轮行动力+1）</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <ol class="list-decimal pl-6 mb-4 space-y-2" start="4">
+                        <li>
+                            <strong>政策阶段</strong>：所有玩家回合结束后，翻开并执行本轮政策牌（若无则跳过）。
+                        </li>
+                        <li>
+                            <strong>拍卖阶段</strong>：结算政策牌后，将拍卖行内的牌依次拍卖直至清空。
+                        </li>
+                        <li>
+                            <strong>检查阶段</strong>：若公示区古物牌数量大于7，则下轮开始时抽取一张政策牌。
+                        </li>
+                        <li>
+                            <strong>新一轮</strong>：进入下一轮，流程重复。
+                        </li>
+                    </ol>
+                </section>
+                <section id="features" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-star-line mr-2"></i>游戏特色</h2>
+                    <ul class="list-disc pl-6 mb-4 space-y-3">
+                        <li><strong>探秘古墓</strong>：消耗一定的行动点数，以此进入古墓获取真品古物。</li>
+                        <li><strong>市场淘宝</strong>：市场中会有源源不断的机会获得古物，但其中不乏赝品；需要鉴定后方知真伪。</li>
+                        <li><strong>鉴定古物</strong>：进入鉴定机构并将手中的古物牌鉴定成功后就可以使用它们独特的能力了。</li>
+                        <li><strong>收集、组合、排序</strong>：通过收集不同的古物，来解锁搭配不同的技能，若使同类型古物排列得当，则会更轻易获得胜利，你能否找寻出当下古物排列组合的最优解呢？</li>
+                        <li><strong>秘密的奖惩</strong>：当游戏满足条件后，玩家们会抽取一张谁都不知道内容的"政策牌"，并于最后结算它的奖惩措施。</li>
+                        <li><strong>丰富的随机性</strong>：游戏的任何一步都充满着未知，来一丁点运气没准能扭转乾坤。</li>
+                    </ul>
+                </section>
+                <section id="end" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-flag-2-line mr-2"></i>游戏结束条件</h2>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">正常结束条件</h3>
+                    <p>游戏将会在一名玩家的公示区内首次集齐9件古物后进入倒计时，在下一轮结束后的同时游戏结束，进行总积分结算。（在游戏过程中努力争夺最高分获取胜利吧！）</p>
+
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">其他结束条件</h3>
+                    <ul class="list-disc pl-6 mb-4">
+                        <li>完成特殊鉴定牌任务-⭐鉴定牌【馆长的亲自鉴定】：该鉴定牌鉴定成功古物后，馆长会将其列为镇馆之宝，则立即获胜。</li>
+                        <li>触发古物牌技能：玉云龙纹炉-该古物在场上存在三轮后游戏结束。</li>
+                        <li>触发工具牌效果：提前交卷-游戏立即进入倒计时，下一轮结束后即为游戏结束。</li>
+                        <li>终幕：闭市，封锁-古墓和市场同时处于无牌状态后游戏立即结束。</li>
+                    </ul>
+                </section>
+                <section id="artifacts" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="w-full md:h-full">
+                                <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-shape-line mr-2"></i>古物牌种类</h2>
+                                <h3 class="text-xl font-semibold text-blue-600 mb-2">常见类别</h3>
+                                <ul class="list-disc pl-6 mb-4 space-y-3">
+                                    <li><span style="color:#10B981;">【绿色】</span>：玉石类</li>
+                                    <li><span style="color:#F43F5E;">【红色】</span>：雕像类</li>
+                                    <li><span style="color:#3B82F6;">【蓝色】</span>：器具类</li>
+                                    <li><span style="color:#F5F5F5; text-shadow:0 0 2px #333;">【白色】</span>：字画类</li>
+                                    <li><span style="color:#FFD600;">【黄色】</span>：经济类</li>
+
+                                </ul>
+                            </div>
+                            <div class="w-full md:h-full">
+                                <!-- 轮播容器（复用setup区域结构） -->
+                                <div class="relative" id="image-carousel-artifacts">
+                                    <div class="carousel-container overflow-hidden rounded relative group" style="height: 242px; position: relative;">
+                                        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-20 select-none" style="white-space:nowrap;">点击查看大图</span>
+                                        <div class="absolute inset-0 transition bg-black/0 group-hover:bg-black/40 z-10 pointer-events-none"></div>
+                                        <img src="img/卡牌介绍/古物介绍.png" alt="古物介绍" class="carousel-image-artifacts absolute inset-0 w-full h-full object-contain transition-opacity duration-500" data-index="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <h3 class="text-xl font-semibold text-blue-600 mb-2">隐藏类别</h3>
+                            <ul class="list-disc pl-6 mb-4">
+                                <li>【附带价值】：货币类（不在五大基础类别中，古物附带价值即拥有此类别）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section id="scoring" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-calculator-line mr-2"></i>积分结算规则</h2>
+
+                    <ol class="list-decimal pl-6 mb-8" style="line-height: 2;">
+                        <li>公示区内的每张古物牌的基础积分为1。</li>
+                        <li>计算时先基础分，再组别分，最后技能分。</li>
+                        <li>若有连续三张古物牌类别形成拼接，则归为一组，每组积分+1。</li>
+                        <li>已被归类的古物牌不可再次被归类。</li>
+                        <li>积分结算时应当从左至右依次结算每一个古物，而非同时计算。</li>
+                        <li>本轮技能失效的古物在积分结算中无法使用该技能。</li>
+                        <li>任何在积分结算时打出的工具牌必须要在分数结算完成前使用，不可在结算后打出，一旦结算完成且所有玩家无异议，便认定为该公示区的最终分数。</li>
+                    </ol>
+
+                    <ol class="flex flex-col md:flex-row gap-6 items-start mt-4 list-none p-0">
+                        <!-- 左侧文字说明 -->
+                        <li class="example p-4 rounded-lg border flex-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                            <p><strong>归类拼组举例</strong>：</p>
+                            <p>其中 ABC 相连处为同一类别，形成拼接，所以可归类为一组；BCD、CDE虽然也形成拼接，但C已被归类，在ABC组内，所以不可成组。</p>
+                        </li>
+                        <!-- 右侧轮播图 -->
+                        <li class="relative w-full md:flex-1 md:min-w-[250px] md:max-w-[400px]" id="image-carousel-grouping">
+                            <section class="carousel-container overflow-hidden rounded relative group" style="height: 250px; position: relative;">
+                                <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-20 select-none" style="white-space:nowrap;">点击查看大图</span>
+                                <span class="absolute inset-0 transition bg-black/0 group-hover:bg-black/40 z-10 pointer-events-none"></span>
+                                <img src="img/卡牌介绍/归类成组.png" alt="归类成组示例" class="carousel-image-grouping absolute inset-0 w-full h-full object-contain transition-opacity duration-500" data-index="0">
+                            </section>
+                        </li>
+                    </ol>
+
+                    <ol class="flex flex-col md:flex-row gap-6 items-start mb-6 list-none p-0">
+                        <!-- 左侧文字说明 -->
+                        <li class="example mt-0 p-4 rounded-lg border flex-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                            <p><strong>积分结算举例</strong>：</p>
+                            <p>从左至右依次加减乘除每一个古物，结算时先基础分，再组别分，最后技能分。</p>
+                            <p>图一：有古物【剪刀】，触发剪刀技能，因为从左到右结算，所以剪刀前的古物（包括剪刀自己）的分数*2。</p>
+                            <p>图一：有古物【八卦镜】，触发八卦镜技能，所有古物基础分+1。</p>
+                        </li>
+                        <!-- 右侧轮播图 -->
+                        <li class="relative w-full md:flex-1 md:min-w-[250px] md:max-w-[400px]" id="image-carousel-scoring">
+                            <section class="carousel-container overflow-hidden rounded relative group" style="height: 250px; position: relative;">
+                                <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 z-20 select-none" style="white-space:nowrap;">点击查看大图</span>
+                                <span class="absolute inset-0 transition bg-black/0 group-hover:bg-black/40 z-10 pointer-events-none"></span>
+                                <img src="img/卡牌介绍/积分计算 - 1.png" alt="积分计算1" class="carousel-image-scoring absolute inset-0 w-full h-full object-contain transition-opacity duration-500" data-index="0">
+                                <img src="img/卡牌介绍/积分计算 - 2.png" alt="积分计算2" class="carousel-image-scoring absolute inset-0 w-full h-full object-contain transition-opacity duration-500 opacity-0" data-index="1">
+                            </section>
+                        </li>
+                    </ol>
+                </section>
+                <section id="terms" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-book-2-line mr-2"></i>游戏内名词解释</h2>
+                    <ul class="list-disc pl-6 mb-8" style="line-height: 2;">
+                        <li><span class="font-semibold text-blue-600">回合</span>：每位玩家的单人行动为一回合。</li>
+                        <li><span class="font-semibold text-blue-600">轮</span>：所有玩家的个人回合阶段与政策/拍卖等公共阶段的总和。</li>
+                        <li><span class="font-semibold text-blue-600">正置</span>：将卡牌正面放置。（文字正向朝自己）</li>
+                        <li><span class="font-semibold text-blue-600">倒置</span>：将卡牌倒转放置。（文字反向朝自己）</li>
+                        <li><span class="font-semibold text-blue-600">置入状态</span>：即正置与倒置两种情况。</li>
+                        <li><span class="font-semibold text-blue-600">翻面</span>：将卡牌背朝上放置。</li>
+                        <li><span class="font-semibold text-blue-600">使用</span>：触发卡牌技能效果，然后置入回收站。</li>
+                        <li><span class="font-semibold text-blue-600">鉴定</span>：向所有玩家展示需要鉴定的古物，然后抽取两张鉴定牌并对照翻开的鉴定牌词条，该过程中可使用工具牌或其他古物效果协助以满足词条条件，若词条均满足则鉴定成功，将展示的古物牌正置于公示区；反之无事发生。</li>
+                        <li><span class="font-semibold text-blue-600">限定效果</span>：古物技能的附带效果，使用此技能效果后，失去此技能，直到该古物重新进入公示区后恢复。</li>
+                        <li><span class="font-semibold text-blue-600">固定</span>：古物牌无法离开带有固定效果的公示区。</li>
+                    </ul>
+                </section>
+                <section id="areas" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-map-pin-line mr-2"></i>区域说明</h2>
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">公共区域</h3>
+                    <ol class="list-decimal pl-6 mb-4">
+                        <li>
+                            <strong>【市场】（牌堆1）</strong>：
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>每回合只可进入一次</li>
+                                <li>进入市场后，单独观看牌堆顶上的三张牌，然后选择一张收入手牌，其余牌置入回收站</li>
+                                <li>一轮过程中，市场无牌后不立即补充，而是在下一轮开始时将回收站洗牌转入市场</li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <strong>【古墓】（牌堆2）</strong>：
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>每回合只可进入一次</li>
+                                <li>需要消耗3行动点数可进入古墓</li>
+                                <li>进入古墓后，翻开古墓牌堆顶上的两张牌并选择一张牌，根据选择结果，若为：古物牌-立即倒置于公示区最右侧，不为古物牌-收入手牌；其余的牌均置入回收站。</li>
+                                <li>进入古墓后若同时获得多张古物牌，则玩家自定先后顺序置入公示区。</li>
+                                <li>若本轮没有人进入古墓，则将古墓顶上的一张牌翻开并置入回收站</li>
+                                <li>该区域无法通过任何手段增加牌堆数量，用完即止。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>【回收站】（弃牌堆）</strong>：
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>所有使用过的工具牌及被弃置的牌都需要置入回收站</li>
+                                <li>当市场无牌后，下一轮开始时将回收站内的所有牌洗牌后重新转入市场。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>【鉴定机构】</strong>：（使古物卡激活技能并置入公示区）
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>从手牌中展示一张古物牌，并抽取一张鉴定牌，展示的古物牌需满足鉴定牌上的所有词条方为鉴定成功；否则无事发生。</li>
+                                <li>鉴定成功后的古物牌需立即置入公示区的最右侧</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>【政策卡】</strong>：（随机的奖惩结算）
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>本轮结束时若有玩家的公示区内古物牌数量>6，则下一轮开始前抽取一张政策牌，背面朝上置于一旁</li>
+                                <li>本轮最后一名玩家回合结束后，向所有玩家展示之前抽取的政策牌，并执行牌面上的奖惩内容</li>
+                                <li>结算后所有政策牌洗混归置一旁</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>【拍卖行】</strong>（货币交易区域）
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>在拍卖行内的所有牌统一在拍卖阶段拍卖。</li>
+                                <li>由本轮末位玩家开始首位玩家结束的顺序依次出价，出价最高者成交。</li>
+                                <li>竞拍出价时必须比上一位玩家的价值更高，相同价格不能出价。</li>
+                                <li>拍卖时需依次对每一张卡牌单独进行竞拍，直到所有牌成交或流拍</li>
+                                <li>若成交为古物卡，将其正置入公示区最右侧；若不为古物卡，则收入手牌。</li>
+                                <li>若有卡牌未成交导致流拍，则转入回收站</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3 class="text-xl font-semibold text-blue-600 mb-2">玩家个人区域</h3>
+                    <ol class="list-decimal pl-6 mb-4">
+                        <li>
+                            <strong>【公示区】</strong>：（最终积分结算区域）
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>位于玩家面前的区域，玩家需将收集到的古物卡按条件放置于公示区内才可获得相应积分并取得胜利。</li>
+                                <li>手牌中的古物卡需进行鉴定后方可置入公示区</li>
+                                <li>置入公示区内的古物可以在激活阶段以从左至右的顺序依次生效/使用其卡面技能效果</li>
+                                <li>注：古物被动效果可同时生效，但结算顺序仍为从左至右（即公示区内12345排列的古物中，1使数值加一，2使得数值翻倍，应当先加一后翻倍）</li>
+                                <li>本轮位次发生变动的古物技能效果失效（需将失效古物翻过来，卡背朝上作为标记，于下轮开始时所有玩家统一翻回来）。</li>
+                                <li>例A：12345排列的古物中，1移动至5右侧，转变为23451，导致所有古物位置发生变动，所以12345古物均失效一轮。</li>
+                                <li>例B：12345排列的古物中，1与5对调位置。转变为52341，其中234位置没有发生变动，所以仍可生效，而15变动位置所以失效一轮）</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>【手牌区】</strong>：（个人基础存储区域）
+                            <ul class="list-disc pl-6 mb-8">
+                                <li>每位玩家在个人回合结束后，留存至多6张手牌</li>
+                                <li>以任何方式进入手牌区内的古物卡，其鉴定状态均转变为'未鉴定'状态</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+                <section id="faq" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
+                    <h2 class="text-2xl font-bold mb-6" style="color:var(--text-color);"><i class="ri-question-line mr-2"></i>常见问题与解答</h2>
+                    <ol class="example-list mt-4 p-4 rounded-lg border" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color); list-style-type: decimal;">
+                        <li class="mb-8">
+                            <b>Q：</b><b>如果我进入市场或古墓摸牌后导致该区域无牌，从而触发终幕，我还能进行后续行动吗？</b><br>
+                            <b>A：</b>不行，一旦触发终幕则游戏立即结束，停止一切行动，这被视为最高优先级。
+                        </li>
+                        <li class="mb-8">
+                            <b>Q：</b><b>如何区分古物牌的类别呢？</b><br>
+                            <b>A：</b>在古物牌的牌面两侧，玩家们可以明显的观察到有[左右相同]或[左右不同]的颜色标识；例如【扬州鼎】，左右都是相同的蓝色，所以扬州鼎只包含一种器具类别。而【子冈牌】左右则是绿色和黄色，标识它同时拥有玉石类和经济类两种类别的古物。而货币类别则不在五大基础类别当中，只要古物附带价值，那么它就会拥有货币类别。
+                        </li>
+                        <li class="mb-8">
+                            <b>Q：</b><b>不同类别的古物会有什么效果吗，为什么要区分类别？</b><br>
+                            <b>A：</b>古物的类别会影响到最终积分的结束，在游戏中合适恰当的排列古物，让三张彼此间相同类别的古物凑成一组可以获得额外积分！
+                        </li>
+                        <li class="mb-8">
+                            <b>Q：</b><b>怎么查看所展示的古物牌是否满足鉴定牌上所需求的存世年限，水渍，裂隙，划痕等词条。</b><br>
+                            <b>A：</b>任何一张古物牌都是"零词条"，玩家们需要通过泥巴，脏水，榔头，刻刀等一些其他卡牌或技能增加所要鉴定古物的词条。
+                        </li>
+                        <li class="mb-8">
+                            <b>Q：</b><b>如果我的上家回合内把市场摸空了，导致我⽆法进⼊市场了怎么办？</b><br>
+                            <b>A：</b>很抱歉，市场牌堆的补牌机制在新的⼀轮开始时，如果此时在你的回合中还未进⼊下⼀轮，那么你可以尝试其他的⾏动步骤。
+                        </li>
+                        <li class="mb-8">
+                            <b>Q：</b><b>货币类别的古物要怎么凑成一组呢？</b><br>
+                            <b>A：</b>与其他五种类别不同，货币类仅作为一种称呼，任何附带价值的古物都属于货币类，且货币类并不能与五种基础类别形成拼接，也不受任何技能影响，它更像是一种可有可无的"俗称"。
+                        </li>
+                    </ol>
+                </section>
+
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="kobe_section">
+            <div class="kobe_footer">
+                <div class="container">
+                    <div class="footer_inner" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 0 4px 0; color: #fff; font-size: 15px;">
+                        <span>古物帮©2025</span>
+                        <span style="color: #888;">|</span>
+                        <span>策划&设计：啊层</span>
+                        <span style="color: #888;">|</span>
+                        <span>美术&程序：psdoc烛光</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Footer -->
+    </div>
+    <!-- /Wrapper All -->
+    <!-- Scripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/init.js"></script>
+    <!-- /Scripts -->
+    <script>
+        // 主题切换功能（与index.html同步）
+        function setTheme(theme) {
+            document.body.classList.remove('theme-white', 'theme-black');
+            document.body.classList.add(`theme-${theme}`);
+            localStorage.setItem('theme', theme);
+            document.querySelectorAll('input, select').forEach(el => {
+                el.style.backgroundColor = 'var(--input-bg)';
+                el.style.borderColor = 'var(--border-color)';
+                el.style.color = 'var(--text-color)';
+            });
+            // 切换按钮样式和图标（单色风格）
+            const toggleBtn = document.getElementById('theme-toggle');
+            const icon = document.getElementById('theme-toggle-icon');
+            if (theme === 'white') {
+                toggleBtn.style.background = '#fff';
+                toggleBtn.style.border = 'none';
+                icon.className = 'ri-sun-line';
+                icon.style.color = '#333';
+            } else {
+                toggleBtn.style.background = '#000';
+                toggleBtn.style.border = 'none';
+                icon.className = 'ri-moon-line';
+                icon.style.color = '#eee';
+            }
+        }
+        // 初始化主题
+        const savedTheme = localStorage.getItem('theme') || 'black';
+        setTheme(savedTheme);
+        // 单按钮切换主题
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const current = document.body.classList.contains('theme-white') ? 'white' : 'black';
+            setTheme(current === 'white' ? 'black' : 'white');
+        });
+        // 移动端目录抽屉逻辑
+        const openBtn = document.getElementById('open-toc-btn');
+        const closeBtn = document.getElementById('close-toc-btn');
+        const drawer = document.getElementById('toc-drawer');
+        const backdrop = document.getElementById('toc-backdrop');
+        // 打开
+        openBtn && openBtn.addEventListener('click', function() {
+            drawer.classList.add('open');
+            backdrop.classList.add('open');
+        });
+        // 关闭
+        closeBtn && closeBtn.addEventListener('click', function() {
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+        });
+        backdrop && backdrop.addEventListener('click', function() {
+            drawer.classList.remove('open');
+            backdrop.classList.remove('open');
+        });
+        // 点击目录项后自动关闭（移动端）
+        drawer && drawer.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var href = link.getAttribute('href');
+                if(href && href.startsWith('#')) {
+                    var target = document.querySelector(href);
+                    if(target) {
+                        e.preventDefault();
+                        // 居中滚动到section
+                        var rect = target.getBoundingClientRect();
+                        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        var targetY = rect.top + scrollTop - (window.innerHeight/2) + (rect.height/2);
+                        window.scrollTo({top: targetY, behavior:'smooth'});
+                    }
+                }
+                if(window.innerWidth < 1024) {
+                    drawer.classList.remove('open');
+                    backdrop.classList.remove('open');
+                }
+            });
+        });
+    </script>
+    <script>
+        // 目录高亮功能
+        (function() {
+            const sections = [
+                {id: 'intro', toc: 'toc-intro'},
+                {id: 'accessories', toc: 'toc-accessories'},
+                {id: 'setup', toc: 'toc-setup'},
+                {id: 'flow', toc: 'toc-flow'},
+                {id: 'features', toc: 'toc-features'},
+                {id: 'end', toc: 'toc-end'},
+                {id: 'artifacts', toc: 'toc-artifacts'},
+                {id: 'scoring', toc: 'toc-scoring'},
+                {id: 'terms', toc: 'toc-terms'},
+                {id: 'areas', toc: 'toc-areas'},
+                {id: 'faq', toc: 'toc-faq'},
+            ];
+            function onScroll() {
+                let minDist = Infinity;
+                let current = null;
+                for (let i = 0; i < sections.length; i++) {
+                    const sec = document.getElementById(sections[i].id);
+                    if (sec) {
+                        const rect = sec.getBoundingClientRect();
+                        const dist = Math.abs(rect.top - 120); // 120为顶部偏移
+                        if (rect.top <= window.innerHeight * 0.5 && dist < minDist) {
+                            minDist = dist;
+                            current = sections[i];
+                        }
+                    }
+                }
+                sections.forEach(s => {
+                    const toc = document.getElementById(s.toc);
+                    if (toc) toc.classList.remove('active');
+                });
+                if (current) {
+                    const toc = document.getElementById(current.toc);
+                    if (toc) toc.classList.add('active');
+                }
+            }
+            window.addEventListener('scroll', onScroll, {passive:true});
+            window.addEventListener('resize', onScroll);
+            document.addEventListener('DOMContentLoaded', onScroll);
+            document.querySelectorAll('.toc-float a, .toc-drawer a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    setTimeout(onScroll, 400);
+                });
+            });
+        })();
+    </script>
+    <script>
+        // 目录点击锚点居中滚动（桌面端和移动端都适用）
+        document.querySelectorAll('.toc-float a, .toc-drawer a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var href = link.getAttribute('href');
+                if(href && href.startsWith('#')) {
+                    var target = document.querySelector(href);
+                    if(target) {
+                        e.preventDefault();
+                        var rect = target.getBoundingClientRect();
+                        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        var targetY = rect.top + scrollTop - (window.innerHeight/2) + (rect.height/2);
+                        window.scrollTo({top: targetY, behavior:'smooth'});
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- 图片放大模态框 -->
+<div id="image-modal" class="fixed inset-0 bg-black/80 z-[9999] hidden flex-col items-center justify-center p-4">
+    <button id="modal-close" class="absolute top-4 right-4 text-white text-2xl hover:text-gray-300 z-10" aria-label="关闭">
+        <i class="ri-close-line"></i>
+    </button>
+    <button id="modal-prev" class="absolute left-8 top-1/2 -translate-y-1/2 bg-black/60 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl hover:bg-black/80 z-20" aria-label="上一张" style="margin-top:0;">
+        <i class="ri-arrow-left-s-line"></i>
+    </button>
+    <img id="modal-image" src="" alt="放大图片" class="max-w-full max-h-[70vh] object-contain mb-4 shadow-2xl rounded-lg border-4 border-white relative z-10">
+    <button id="modal-next" class="absolute right-8 top-1/2 -translate-y-1/2 bg-black/60 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl hover:bg-black/80 z-20" aria-label="下一张" style="margin-top:0;">
+        <i class="ri-arrow-right-s-line"></i>
+    </button>
+    <div id="modal-thumbnails" class="flex gap-2 justify-center mt-2 z-10"></div>
+</div>
+
+<script>
+// 轮播功能实现
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取轮播相关元素
+    const carouselImages = document.querySelectorAll('.carousel-image');
+    // const indicators = document.querySelectorAll('.carousel-indicators button');
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalClose = document.getElementById('modal-close');
+    const modalThumbnails = document.getElementById('modal-thumbnails');
+    let currentIndex = 0;
+    const totalImages = carouselImages.length;
+    let modalCurrentIndex = 0;
+    let modalImageList = carouselImages; // 默认小轮播图
+
+    // 显示指定索引的图片
+    function showImage(index) {
+        // 隐藏所有图片
+        carouselImages.forEach(img => {
+            img.classList.add('opacity-0');
+            img.classList.remove('opacity-100');
+        });
+        // 重置所有指示器
+        // indicators.forEach(ind => ind.classList.remove('bg-primary'));
+        // indicators.forEach(ind => ind.classList.add('bg-gray-300'));
+
+        // 显示当前图片和激活当前指示器
+        carouselImages[index].classList.remove('opacity-0');
+        carouselImages[index].classList.add('opacity-100');
+        // indicators[index].classList.remove('bg-gray-300');
+        // indicators[index].classList.add('bg-primary');
+
+        currentIndex = index;
+    }
+
+    // 上一张图片
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        showImage(currentIndex);
+    }
+
+    // 下一张图片
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        showImage(currentIndex);
+    }
+
+    // 点击指示器切换图片
+    // indicators.forEach(ind => {
+    //     ind.addEventListener('click', function() {
+    //         const index = parseInt(this.dataset.index);
+    //         showImage(index);
+    //     });
+    // });
+
+    // 点击图片放大（小轮播图）
+    carouselImages.forEach((img, idx) => {
+        img.addEventListener('click', function() {
+            modalCurrentIndex = idx;
+            modalImageList = carouselImages;
+            showModalImage(modalCurrentIndex);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // 防止背景滚动
+        });
+    });
+
+    function showModalImage(index) {
+        modalImage.src = modalImageList[index].src;
+        // 生成缩略图
+        modalThumbnails.innerHTML = '';
+        modalImageList.forEach((thumb, tIdx) => {
+            const thumbImg = document.createElement('img');
+            thumbImg.src = thumb.src;
+            thumbImg.className = 'w-16 h-16 object-cover rounded border-2 cursor-pointer transition-all duration-200 ' + (tIdx === index ? 'border-primary ring-2 ring-primary' : 'border-gray-300');
+            thumbImg.style.background = '#fff';
+            thumbImg.addEventListener('click', function(e) {
+                e.stopPropagation();
+                modalCurrentIndex = tIdx;
+                showModalImage(modalCurrentIndex);
+            });
+            modalThumbnails.appendChild(thumbImg);
+        });
+    }
+
+    // 左右切换按钮
+    const modalPrev = document.getElementById('modal-prev');
+    const modalNext = document.getElementById('modal-next');
+    modalPrev.addEventListener('click', function(e) {
+        e.stopPropagation();
+        modalCurrentIndex = (modalCurrentIndex - 1 + modalImageList.length) % modalImageList.length;
+        showModalImage(modalCurrentIndex);
+    });
+    modalNext.addEventListener('click', function(e) {
+        e.stopPropagation();
+        modalCurrentIndex = (modalCurrentIndex + 1) % modalImageList.length;
+        showModalImage(modalCurrentIndex);
+    });
+
+    // 关闭模态框
+    modalClose.addEventListener('click', function() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = ''; // 恢复背景滚动
+    });
+
+    // 点击模态框背景关闭
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // 绑定按钮事件
+    // prevButton.addEventListener('click', prevImage);
+    // nextButton.addEventListener('click', nextImage);
+
+    // 初始化显示第一张图片
+    showImage(0);
+
+    // 自动轮播，每0.6秒切换下一张
+    setInterval(function() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        showImage(currentIndex);
+    }, 1000);
+
+    // ================== setup区域轮播图 ==================
+    const setupImages = document.querySelectorAll('.carousel-image-setup');
+    let setupIndex = 0;
+    const setupTotal = setupImages.length;
+    // 自动轮播
+    if (setupTotal > 0) {
+        setInterval(function() {
+            setupImages.forEach(img => {
+                img.classList.add('opacity-0');
+                img.classList.remove('opacity-100');
+            });
+            setupIndex = (setupIndex + 1) % setupTotal;
+            setupImages[setupIndex].classList.remove('opacity-0');
+            setupImages[setupIndex].classList.add('opacity-100');
+        }, 1000);
+        // 初始化显示第一张
+        setupImages.forEach(img => {
+            img.classList.add('opacity-0');
+            img.classList.remove('opacity-100');
+        });
+        setupImages[0].classList.remove('opacity-0');
+        setupImages[0].classList.add('opacity-100');
+        // 点击放大（setup轮播图）
+        setupImages.forEach((img, idx) => {
+            img.addEventListener('click', function() {
+                modalCurrentIndex = idx;
+                modalImageList = setupImages;
+                showModalImage(modalCurrentIndex);
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    // ================== artifacts区域轮播图 ==================
+    const artifactsImages = document.querySelectorAll('.carousel-image-artifacts');
+    let artifactsIndex = 0;
+    const artifactsTotal = artifactsImages.length;
+    // 自动轮播
+    if (artifactsTotal > 0) {
+        setInterval(function() {
+            artifactsImages.forEach(img => {
+                img.classList.add('opacity-0');
+                img.classList.remove('opacity-100');
+            });
+            artifactsIndex = (artifactsIndex + 1) % artifactsTotal;
+            artifactsImages[artifactsIndex].classList.remove('opacity-0');
+            artifactsImages[artifactsIndex].classList.add('opacity-100');
+        }, 1000);
+        // 初始化显示第一张
+        artifactsImages.forEach(img => {
+            img.classList.add('opacity-0');
+            img.classList.remove('opacity-100');
+        });
+        artifactsImages[0].classList.remove('opacity-0');
+        artifactsImages[0].classList.add('opacity-100');
+        // 点击放大（artifacts轮播图）
+        artifactsImages.forEach((img, idx) => {
+            img.addEventListener('click', function() {
+                modalCurrentIndex = idx;
+                modalImageList = artifactsImages;
+                showModalImage(modalCurrentIndex);
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    // ================== scoring区域轮播图 ==================
+    const scoringImages = document.querySelectorAll('.carousel-image-scoring');
+    let scoringIndex = 0;
+    const scoringTotal = scoringImages.length;
+    if (scoringTotal > 0) {
+        setInterval(function() {
+            scoringImages.forEach(img => {
+                img.classList.add('opacity-0');
+                img.classList.remove('opacity-100');
+            });
+            scoringIndex = (scoringIndex + 1) % scoringTotal;
+            scoringImages[scoringIndex].classList.remove('opacity-0');
+            scoringImages[scoringIndex].classList.add('opacity-100');
+        }, 1000);
+        // 初始化显示第一张
+        scoringImages.forEach(img => {
+            img.classList.add('opacity-0');
+            img.classList.remove('opacity-100');
+        });
+        scoringImages[0].classList.remove('opacity-0');
+        scoringImages[0].classList.add('opacity-100');
+        // 点击放大（scoring轮播图）
+        scoringImages.forEach((img, idx) => {
+            img.addEventListener('click', function() {
+                modalCurrentIndex = idx;
+                modalImageList = scoringImages;
+                showModalImage(modalCurrentIndex);
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+
+    // ================== grouping区域轮播图 ==================
+    const groupingImages = document.querySelectorAll('.carousel-image-grouping');
+    let groupingIndex = 0;
+    const groupingTotal = groupingImages.length;
+    if (groupingTotal > 0) {
+        setInterval(function() {
+            groupingImages.forEach(img => {
+                img.classList.add('opacity-0');
+                img.classList.remove('opacity-100');
+            });
+            groupingIndex = (groupingIndex + 1) % groupingTotal;
+            groupingImages[groupingIndex].classList.remove('opacity-0');
+            groupingImages[groupingIndex].classList.add('opacity-100');
+        }, 1000);
+        // 初始化显示第一张
+        groupingImages.forEach(img => {
+            img.classList.add('opacity-0');
+            img.classList.remove('opacity-100');
+        });
+        groupingImages[0].classList.remove('opacity-0');
+        groupingImages[0].classList.add('opacity-100');
+        // 点击放大（grouping轮播图）
+        groupingImages.forEach((img, idx) => {
+            img.addEventListener('click', function() {
+                modalCurrentIndex = idx;
+                modalImageList = groupingImages;
+                showModalImage(modalCurrentIndex);
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
+});
+</script>
+</body>
+</html>

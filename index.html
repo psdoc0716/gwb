@@ -1,0 +1,667 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>古物帮</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Saira:300,400,500,600,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:300i,400,400i,600,600i,700&display=swap" rel="stylesheet">
+	<!-- /Fonts -->
+	
+	<!-- Styles -->
+    <link rel="stylesheet" href="css/plugins.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+	<!-- /Styles -->
+	
+	<link rel="icon" type="image/svg+xml" href="img/logo/logo-2.svg">
+	
+	<!-- Font Awesome 6 CDN -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+	
+	<!-- Wrapper All -->
+	<div class="kobe_wrap_all">
+		<!-- Topbar -->
+		<div class="kobe_topbar">
+			<div class="mainpart">
+				<div class="container">
+					<div class="inner" style="display: flex; align-items: center; justify-content: space-between;">
+						<!-- LOGO PC端左对齐，移动端居中对齐 -->
+						<div class="logo" style="order: 1; display: flex; align-items: center; width: 100%; justify-content: flex-start;">
+							<a href="index.html"><img src="img/logo/logo.svg" alt="" style="width:120px; height: auto;" /></a>
+						</div>
+						<style>
+						@media (max-width: 900px) {
+							.logo {
+								justify-content: center !important;
+							}
+						}
+						</style>
+						<!-- 桌面端菜单，移动端同样显示 -->
+						<div class="menu" style="order: 2;">
+							<ul style="display: flex; flex-direction: row; gap: 32px; white-space: nowrap; margin: 0; padding: 0; list-style: none;">
+								<li><a href="index.html">首页</a></li>
+								<li><a href="#about">介绍</a></li>
+								<li><a href="manual.html" onclick="window.location.href='manual.html'; return false;">说明书</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Dropdown -->
+			<div class="dropdown" style="text-align: center;">
+				<div class="container">
+					<div class="main">
+						<ul style="display: inline-block; text-align: left;">
+							<li style="text-align: center;"><a href="#home">首页</a></li>
+							<li style="text-align: center;"><a href="#about">介绍</a></li>
+							<li style="text-align: center;"><a href="manual.html" onclick="window.location.href='manual.html'; return false;" style="font-weight:bold;color:#ff4d4f;">说明书</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /Dropdown -->
+			
+		</div>
+		<!-- /Topbar -->
+		<!-- Hero -->
+		<div class="kobe_section" id="home">
+			<div class="kobe_hero_wrap" data-img-url="img/hero/1.jpg">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="hero_texts" style="display: flex; justify-content: flex-start; align-items: center; transform: translateX(-50px);">
+						<div class="hero_center" style="align-items: flex-start;">
+							<img 
+								src="img/logo/GWB.svg" 
+								alt="古物帮" 
+								class="name hero-logo"
+							/>
+							<span class="subtitle hero-subtitle">《古物帮》是一款多人竞分卡牌游戏，游戏以“牌型构建”为主，玩家作为古物帮成员，要通过找回流失古物竞争帮主之位！</span>
+							<br>
+							<span class="subtitle hero-subtitle" style="color: #888; font-size: 0.85em; ">游戏世界观为架空虚拟，所有设定及玩法均为增加或辅助游戏乐趣，不贴合现实，如有雷同纯属巧合。</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<style>
+			/* =========================
+			   Hero Section Margin/Padding 优化
+			   你可以在这里自定义 Hero 区域和元素的上下左右边距
+			   ========================= */
+
+			:root {
+				/* Hero区整体上下左右边距（可自定义） */
+				--hero-section-margin-top: 0px;         /* Hero区上边距 */
+				--hero-section-margin-bottom: 0px;      /* Hero区下边距 */
+				--hero-section-margin-left: 0px;      /* Hero区左边距 */
+				--hero-section-margin-right: 0px;       /* Hero区右边距 */
+
+				/* logo上下左右边距（可自定义） */
+				--hero-logo-margin-top: -40%;          /* logo上边距 */
+				--hero-logo-margin-bottom: 0px;        /* logo下边距 */
+				--hero-logo-margin-left: 5%;       /* logo左边距 */
+				--hero-logo-margin-right: 5%;          /* logo右边距 */
+
+				/* 副标题上下左右边距（可自定义） */
+				--hero-subtitle-margin-top: 20px;       /* 副标题上边距 */
+				--hero-subtitle-margin-bottom: 0px;     /* 副标题下边距 */
+				--hero-subtitle-margin-left: 5%;       /* 副标题左边距 */
+				--hero-subtitle-margin-right: 5%;      /* 副标题右边距 */
+			}
+
+			.kobe_section#home {
+				/* Hero区的上下左右边距，均可通过变量自定义 */
+				margin-top: var(--hero-section-margin-top);
+				margin-bottom: var(--hero-section-margin-bottom);
+				margin-left: var(--hero-section-margin-left);
+				margin-right: var(--hero-section-margin-right);
+			}
+			.hero_center {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				width: 600px;
+				max-width: 100%;
+				/* 向左偏移已在父级内联样式中设置 */
+			}
+			.hero-logo {
+				max-width: 500px;
+				width: 100%;
+				height: auto;
+				display: block;
+				transition: transform 0.3s;
+				/* logo的上下左右边距均可自定义 */
+				margin-top: var(--hero-logo-margin-top);
+				margin-bottom: var(--hero-logo-margin-bottom);
+				margin-left: var(--hero-logo-margin-left);
+				margin-right: var(--hero-logo-margin-right);
+			}
+			.hero-logo:hover {
+				transform: scale(1.15);
+			}
+			.hero-subtitle {
+				/* 副标题的上下左右边距均可自定义 */
+				margin-top: var(--hero-subtitle-margin-top);
+				margin-bottom: var(--hero-subtitle-margin-bottom);
+				margin-left: var(--hero-subtitle-margin-left);
+				margin-right: var(--hero-subtitle-margin-right);
+				max-width: 400px;
+				text-align: left;
+				display: block;
+				white-space: normal;
+				position: relative;
+				left: 50px;
+			}
+			@media (max-width: 1000px) {
+				.hero_center {
+					width: 100%;
+					max-width: 100%;
+				}
+				.hero-logo {
+					width: 85%;
+					max-width: 100%;
+				}
+				.hero-subtitle {
+					max-width: 50%;
+				}
+				.hero_texts {
+					transform: none !important;
+				}
+				.kobe_section#home {
+					margin-bottom: 30%;/* 移动端下边距可单独调整 */
+				}
+			}
+		</style>
+		<!-- Hero区底部动态向下箭头 -->
+		<div class="hero-down-arrow" style="position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%); z-index: 10;">
+		  <i class="fa fa-chevron-down"></i>
+		</div>
+		<style>
+		.hero-down-arrow i {
+		  font-size: 2.5em;
+		  color: #fff;
+		  animation: arrow-bounce 1.2s infinite cubic-bezier(.4,0,.2,1);
+		}
+		@keyframes arrow-bounce {
+		  0% { transform: translateY(0); }
+		  50% { transform: translateY(18px); }
+		  100% { transform: translateY(0); }
+		}
+		@media (max-width: 900px) {
+		  .hero-down-arrow {
+			bottom: 18px !important;
+		  }
+		  .hero-down-arrow i {
+			font-size: 2em !important;
+		  }
+		}
+		</style>
+		<!-- /Hero -->
+		<!-- 介绍 -->
+		<div class="kobe_section" id="about">
+			<div class="kobe_about_wrap">
+				<div class="container">
+					<div class="about_inner">
+						<div class="about_icons">
+							<div class="about_icon_item">
+								<i class="fa-solid fa-users"></i>
+								<div>2-9人</div>
+							</div>
+							<div class="about_icon_item">
+								<i class="fa-solid fa-clock"></i>
+								<div>30~45分钟</div>
+							</div>
+							<div class="about_icon_item">
+								<i class="fa-solid fa-face-smile"></i>
+								<div>14+</div>
+							</div>
+						</div>
+						<div class="about_texts">
+							<ul class="about-texts-list">
+								<li>《古物帮》是一款多人竞分卡牌游戏，主打“牌型构建”。玩家作为古物帮成员，通过找回流失古物竞争帮主之位。最终博物馆根据古物数量、能力和排列顺序计算得分，决出帮主！</li>
+								<li>游戏包含职业牌、古物牌、工具牌等配件，共226张，融合丰富Roguelike元素，奖励与惩罚并存。</li>
+								<li>玩家需探索获取遗落古物，每个古物附带特殊能力，可干扰对手或强化自身，通过排序组合争取高分。</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 自适应样式，参数注释清晰，方便编辑 -->
+			<style>
+				/* =========================
+				   About区主容器自适应设置
+				   ========================= */
+				.about_inner {
+					display: flex;
+					flex-direction: column; /* 垂直排列 */
+					align-items: flex-start; /* 左对齐，可改center居中 */
+					width: 100%;
+				}
+				/* 图标区样式 */
+				.about_icons {
+					display: flex;
+					flex-direction: row; /* 横向排列 */
+					gap: 48px; /* 图标间距，可调整 */
+					align-items: center;
+					justify-content: center;
+					margin-bottom: 32px; /* 与下方内容间距 */
+					width: 100%;
+				}
+				.about_icon_item {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					color: #fff;
+					font-size: 20px; /* 文字大小 */
+					font-weight: bold;
+				}
+				.about_icon_item i {
+					font-size: 48px; /* 图标大小 */
+					margin-bottom: 8px; /* 图标与文字间距 */
+				}
+				/* 文本区样式 */
+				.about_texts {
+					width: 100%;
+					min-height: 220px; /* 最小高度 */
+					max-width: 100%;/* 最大宽度，可调整 */
+					margin: 0 auto;
+				}
+				.about-texts-list {
+					font-size: clamp(16px, 2vw, 20px); /* 自适应字体大小 */
+					color: #fff;
+					line-height: 1.8;
+					text-align: left;
+					padding-left: 18px;
+					list-style-type: disc;
+					max-width: 100%;
+				}
+				.about-texts-list li {
+					margin-bottom: 8px;
+				}
+				/* =========================
+				   响应式断点设置
+				   ========================= */
+				@media (max-width: 1040px) {
+					.about_texts {
+						max-width: 60%; /* 平板宽度调整，正文变窄 */
+					}
+					.about_icons {
+						gap: 32px; /* 图标间距缩小 */
+					}
+				}
+				@media (max-width: 768px) {
+					.about_inner {
+						align-items: center; /* 居中显示 */
+					}
+					.about_texts {
+						max-width: 80% !important; /* 移动端正文为页面的80% */
+						min-height: 160px; /* 移动端高度可调 */
+						padding-left: 16px;
+						padding-right: 16px;
+					}
+					.about_icons {
+						flex-direction: row;/* 图标竖排 */
+						gap: 20px;
+						margin-bottom: 20px;
+					}
+					.about_icon_item i {
+						font-size: 36px; /* 图标缩小 */
+					}
+					.about_icon_item {
+						font-size: 18px; /* 文字缩小 */
+					}
+				}
+				@media (max-width: 600px){
+					.about_texts {
+						min-height: 120px;
+						max-width: 80% !important; /* 超小屏正文为页面的80% */
+						padding-left: 20px;
+						padding-right: 20px;
+					}
+					.about-texts-list {
+						font-size: 15px;
+						padding-left: 12px;
+					}
+				}
+			</style>
+		</div>
+		<!-- /介绍 -->
+
+        <!-- 规则 -->
+		<div class="kobe_section" id="about">
+			<div class="kobe_about_wrap">
+				<div class="container">
+					<div class="about_inner">
+						<div style="width: 100%; display: flex; justify-content: center;">
+							<h2 style="color: #fff; font-size: 2em; font-weight: bold; margin-bottom: 24px; text-align: center;">游戏规则</h2>
+						</div>
+						<div class="about_texts">
+							<ol class="about-texts-list" style="list-style-type: decimal; line-height: 2; margin-bottom: 0;">
+								<li style="margin-bottom: 18px;"><strong>游戏目标：</strong> 玩家通过收集、组合古物牌，利用职业与工具牌的能力，获得最高分数，成为最终帮主。</li>
+								<li style="margin-bottom: 18px;"><strong>准备阶段：</strong>
+									<ul style="margin-top: 10px; margin-bottom: 10px; line-height: 2;">
+										<li style="margin-bottom: 8px;">将所有古物牌、工具牌洗混后大致平均切成两份，分别组成市场牌堆和古墓牌堆。</li>
+										<li style="margin-bottom: 8px;">将市场牌堆，古墓牌堆，鉴定牌，政策牌，职业牌置于桌面中心。</li>
+										<li style="margin-bottom: 8px;">每位玩家选择/随机分配一张职业牌。</li>
+										<li style="margin-bottom: 8px;">每人发6张起始手牌。</li>
+									</ul>
+								</li>
+								<li style="margin-bottom: 18px;"><strong>回合流程：</strong>
+									<ul style="margin-top: 10px; margin-bottom: 10px; line-height: 2;">
+										<li style="margin-bottom: 8px;">轮到玩家时，选择进行:
+											<ul style="margin-top: 8px; margin-bottom: 8px; line-height: 2;">
+												<li style="margin-bottom: 6px;">排序公示区内的古物牌</li>
+												<li style="margin-bottom: 6px;">进入市场/古墓（获得牌）</li>
+												<li style="margin-bottom: 6px;">进行鉴定（获得古物和能力）</li>
+												<li style="margin-bottom: 6px;">出牌（直接使用各种效果，获得积分）</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li style="margin-bottom: 18px;"><strong>牌型构建：</strong> 玩家可将古物牌按特定顺序排列，形成高分组合。部分古物有连携、加分、扣分等特殊效果。</li>
+								<li style="margin-bottom: 18px;"><strong>游戏结束：</strong> 牌堆耗尽或达到指定回合数后，所有玩家展示手牌与已获得古物，依照规则结算分数。</li>
+								<li style="margin-bottom: 18px;"><strong>胜利条件：</strong> 得分最高者成为“帮主”，如平分则比较古物或手牌数量、位次优先级等决定胜负。</li>
+								<li style="margin-bottom: 18px;"><strong>其他说明：</strong>
+									<ul style="margin-top: 10px; margin-bottom: 10px; line-height: 2;">
+										<li style="margin-bottom: 8px;">游戏包含丰富Roguelike元素，部分事件牌会带来奖励或惩罚。</li>
+										<li style="margin-bottom: 8px;">详细牌面与能力说明请参见说明书。</li>
+									</ul>
+								</li>
+							</ol>
+							<div class="manual-video-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 32px;">
+								<a href="manual.html" class="manual-btn">查看详细说明书</a>
+								<a href="https://www.bilibili.com/video/BV1xxxxxxx" target="_blank" class="manual-btn">查看演示视频</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<style>
+				.about_inner {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					width: 100%;
+				}
+				.about_texts {
+					width: 100%;
+					min-height: 220px;
+					max-width: 100%;
+					margin: 0 auto;
+				}
+				.about-texts-list {
+					font-size: clamp(16px, 2vw, 20px);
+					color: #fff;
+					line-height: 1.8;
+					text-align: left;
+					padding-left: 18px;
+					max-width: 100%;
+				}
+				.about-texts-list li {
+					margin-bottom: 8px;
+				}
+				.about-texts-list ul {
+					margin-top: 6px;
+					margin-bottom: 6px;
+					padding-left: 20px;
+					list-style-type: disc;
+				}
+				.manual-video-buttons {
+					display: flex;
+					gap: 20px;
+					justify-content: center;
+					margin-top: 32px;
+				}
+				.manual-video-buttons a {
+					background: #4d0101;
+					color: #fff;
+					font-weight: bold;
+					border-radius: 6px;
+					padding: 14px 32px;
+					font-size: 18px;
+					text-decoration: none;
+					box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+					transition: background 0.2s, color 0.2s;
+					min-width: 200px;
+					text-align: center;
+					display: inline-block;
+					border: none;
+				}
+				.manual-video-buttons a:hover,
+				.manual-video-buttons a:focus {
+					background: #921212;
+					color: #fff;
+				}
+				@media (max-width: 1040px) {
+					.about_texts {
+						max-width: 60%;
+					}
+				}
+				@media (max-width: 768px) {
+					.about_inner {
+						align-items: center;
+					}
+					.about_texts {
+						max-width: 80% !important;
+						min-height: 160px;
+						padding-left: 16px;
+						padding-right: 16px;
+					}
+					.manual-video-buttons {
+						flex-direction: column;
+						align-items: center;
+						gap: 20px;
+					}
+					.manual-video-buttons a {
+						width: 90%;
+						font-size: 20px;
+						padding: 18px 0;
+						margin: 0 auto;
+						text-align: center;
+						min-width: unset;
+					}
+				}
+				@media (max-width: 600px){
+					.about_texts {
+						min-height: 120px;
+						max-width: 80% !important;
+						padding-left: 20px;
+						padding-right: 20px;
+					}
+					.about-texts-list {
+						font-size: 15px;
+						padding-left: 12px;
+					}
+					.manual-video-buttons {
+						flex-direction: column;
+						align-items: center;
+						gap: 20px;
+						margin-bottom: 48px;
+					}
+					.manual-video-buttons a {
+						width: 90%;
+						font-size: 20px;
+						padding: 18px 0;
+						margin: 0 auto;
+						text-align: center;
+						min-width: unset;
+					}
+				}
+			</style>
+		</div>
+		<!-- 规则 -->
+
+		<!-- Footer -->
+		<div class="kobe_section">
+			<div class="kobe_footer">
+				<div class="container">
+					<div class="footer_inner" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 0 4px 0; color: #fff; font-size: 15px;">
+						<span>古物帮©2025</span>
+						<span style="color: #888;">|</span>
+						<span>策划&设计：啊层</span>
+						<span style="color: #888;">|</span>
+						<span>美术&程序：psdoc烛光</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Footer -->
+	</div>
+	<!-- /Wrapper All -->	
+
+<!-- Scripts -->
+<script src="js/jquery.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/init.js"></script>
+<!-- /Scripts -->
+
+<style>
+@media (max-width: 1200px) {
+  .services-content { max-width: 100% !important; }
+}
+@media (max-width: 900px) {
+  .services-content { max-width: 100% !important; }
+  .service-rules, .rule-manual, .rule-video { max-width: 100% !important; margin: 0 0 24px 0 !important; }
+}
+@media (max-width: 600px) {
+  .footer_inner {
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    font-size: 15px !important;
+    padding: 12px 0 4px 0 !important;
+  }
+  .manual-video-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+    margin-bottom: 48px !important;
+  }
+  .manual-video-buttons a, .manual-video-buttons button {
+    width: 90% !important;
+    font-size: 20px !important;
+    padding: 18px 0 !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+  .kobe_header .logo img {
+    width: 72px !important;
+    height: auto !important;
+  }
+  .kobe_header .logo-title, .kobe_header .logo_title, .kobe_header .site-title {
+    font-size: 22px !important;
+    letter-spacing: 2px !important;
+    margin-left: 8px !important;
+  }
+  .kobe_header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    height: 64px !important;
+    padding: 0 12px !important;
+  }
+  .kobe_header .logo {
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;
+  }
+  .kobe_header .menu {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 28px !important;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    z-index: 10 !important;
+    padding: 0 12px !important;
+    cursor: pointer !important;
+  }
+  .kobe_header nav, .kobe_header .main-menu {
+    display: none !important;
+  }
+}
+</style>
+<style>
+  /* 统一介绍和规则板块的自适应宽度与排版 */
+  .about_texts, .services-content {
+    width: 65%;
+    max-width: 800px;
+    min-width: 260px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  @media (max-width: 900px) {
+    .about_texts, .services-content {
+      width: 92%;
+      max-width: 100%;
+      padding-left: 0 !important;
+    }
+  }
+  .about-texts-list, .service-rules ol {
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.8;
+    text-align: left;
+    padding-left: 18px;
+    list-style-type: disc;
+    max-width: 100%;
+  }
+  .about-texts-list li, .service-rules ol li {
+    margin-bottom: 8px;
+  }
+  @media (max-width: 600px) {
+    .about-texts-list, .service-rules ol {
+      font-size: 16px;
+      padding-left: 10px;
+    }
+    .about_texts, .services-content {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+</style>
+<!-- 汉堡按钮样式和结构 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var menuBtn = document.querySelector('.kobe_header .menu');
+  if(menuBtn) {
+    menuBtn.innerHTML = '<i class="fa fa-bars"></i>';
+    menuBtn.title = '菜单';
+    menuBtn.style.display = 'block';
+  }
+});
+</script>
+<script>
+window.addEventListener('scroll', function() {
+  var arrow = document.querySelector('.hero-down-arrow');
+  if (!arrow) return;
+  if (window.scrollY > 40) {
+    arrow.style.opacity = '0';
+    arrow.style.pointerEvents = 'none';
+    arrow.style.transition = 'opacity 0.4s';
+  } else {
+    arrow.style.opacity = '1';
+    arrow.style.pointerEvents = 'auto';
+    arrow.style.transition = 'opacity 0.4s';
+  }
+});
+</script>
+
+</body>
+</html>
