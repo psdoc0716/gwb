@@ -247,7 +247,7 @@
             top: 100px;
             left: 0;
             width: 260px;
-            z-index: 900;
+            z-index: 40;
             background: none;
             box-shadow: none;
             border: none;
@@ -325,6 +325,87 @@
         @media (max-width: 600px) {
             .hide-on-mobile { display: none !important; }
         }
+        
+        /* 搜索栏样式 */
+        .search-container {
+            margin-bottom: 20px;
+        }
+        
+        .search-input-group input:focus {
+            border-color: #3B82F6;
+        }
+        
+        #search-results {
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 4px;
+        }
+        
+        #search-results::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #search-results::-webkit-scrollbar-track {
+            background: var(--panel-bg);
+        }
+        
+        #search-results::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        
+        /* PC端搜索结果滚动条样式 */
+        #search-results::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #search-results::-webkit-scrollbar-track {
+            background: var(--panel-bg);
+            border-radius: 3px;
+        }
+        
+        #search-results::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        
+        #search-results::-webkit-scrollbar-thumb:hover {
+            background: #999;
+        }
+        
+        /* 移动端样式 */
+        @media (max-width: 1023px) {
+            .search-container {
+                display: none !important;
+            }
+            
+            /* 显示移动端目录按钮 */
+            .mobile-toc-toggle {
+                display: block !important;
+            }
+            
+            /* 调整LOGO位置 */
+            .logo {
+                justify-content: center !important;
+            }
+        }
+        
+        /* 桌面端隐藏移动端按钮 */
+        @media (min-width: 1024px) {
+            .mobile-toc-toggle {
+                display: none !important;
+            }
+        }
+        
+        /* 移动端按钮悬停效果 */
+        .mobile-toc-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        /* 移动端目录链接点击效果 */
+        .mobile-toc-link:active {
+            background-color: var(--hover-color) !important;
+        }
     </style>
 </head>
 <body class="min-h-screen font-sans" style="background-color:var(--bg-color);color:var(--text-color);">
@@ -338,8 +419,10 @@
             <div class="mainpart">
                 <div class="container">
                     <div class="inner" style="display: flex; align-items: center; justify-content: space-between;">
-                        <!-- 移动端三横杠菜单按钮，左侧显示，仅移动端显示 -->
-                        <!-- 已删除汉堡按钮及相关样式 -->
+                        <!-- 移动端目录按钮，左侧显示，仅移动端显示 -->
+                        <button id="mobile-toc-toggle" class="mobile-toc-toggle" style="order: 0; display: none; background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; padding: 8px; border-radius: 4px; transition: background-color 0.2s;" title="展开目录">
+                            <i class="fa fa-bars"></i>
+                        </button>
                         <!-- LOGO PC端左对齐，移动端居中对齐 -->
                         <div class="logo" style="order: 1; display: flex; align-items: center; width: 100%; justify-content: flex-start;">
                             <a href="index.html"><img src="img/logo/logo.svg" alt="" style="width:120px; height: auto;" /></a>
@@ -379,10 +462,108 @@
             <!-- /Dropdown -->
         </div>
         <!-- /Topbar -->
+        
+        <!-- 移动端目录抽屉 -->
+        <div id="mobile-toc-drawer" class="mobile-toc-drawer" style="position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: var(--panel-bg); z-index: 1000; transform: translateX(-100%); transition: transform 0.3s ease; border-right: 1px solid var(--border-color); overflow-y: auto;">
+            <div style="padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="color: var(--text-color); font-size: 18px; font-weight: bold; margin: 0;">目录</h3>
+                    <button id="mobile-toc-close" style="background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; padding: 4px;" title="关闭">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- 移动端搜索按钮 -->
+                <div class="mobile-search-container" style="margin-bottom: 20px;">
+                    <button 
+                        id="mobile-search-btn" 
+                        style="width: 100%; padding: 12px; background: #4D0101; color: white; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;"
+                        onmouseover="this.style.backgroundColor='#4D0101'" 
+                        onmouseout="this.style.backgroundColor='#4D0101'"
+                    >
+                        <i class="fa fa-search"></i>
+                        搜索说明书内容
+                    </button>
+                </div>
+                
+                <!-- 移动端目录列表 -->
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 12px;"><a href="#intro" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">游戏背景</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#accessories" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">卡牌构成</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#setup" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">游戏初期设置</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#flow" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">游戏流程</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#features" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">游戏特色</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#end" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">游戏结束条件</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#artifacts" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">古物牌种类</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#scoring" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">积分结算规则</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#terms" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">名词解释</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#areas" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">区域说明</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#faq" class="mobile-toc-link" style="color: var(--text-color); text-decoration: none; display: block; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--hover-color)'" onmouseout="this.style.backgroundColor=''">常见问题与解答</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 移动端背景遮罩 -->
+        <div id="mobile-toc-backdrop" class="mobile-toc-backdrop" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s ease;"></div>
+        
+        <!-- 移动端搜索结果模态框 -->
+        <div id="mobile-search-modal" class="mobile-search-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; display: none; opacity: 0; transition: opacity 0.3s ease;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 400px; max-height: 80vh; background: var(--panel-bg); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+                <!-- 模态框头部 -->
+                <div style="padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="color: var(--text-color); font-size: 18px; font-weight: bold; margin: 0;">搜索结果</h3>
+                    <button id="mobile-search-close" style="background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; padding: 4px;" title="关闭">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- 搜索输入框 -->
+                <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input 
+                            type="text" 
+                            id="mobile-search-input" 
+                            placeholder="输入关键词搜索..." 
+                            style="width: 100%; padding: 12px 40px 12px 12px; border: 2px solid var(--border-color); border-radius: 6px; background: var(--input-bg); color: var(--text-color); font-size: 16px; outline: none; transition: border-color 0.2s;"
+                        >
+                        <i class="fa fa-search" style="position: absolute; right: 12px; color: #888; font-size: 18px; pointer-events: none;"></i>
+                    </div>
+                </div>
+                
+                <!-- 搜索结果区域 -->
+                <div id="mobile-search-results" style="flex: 1; padding: 20px; overflow-y: auto; max-height: 60vh;">
+                    <div style="text-align: center; color: var(--text-color); font-size: 16px;">
+                        点击上方搜索按钮开始搜索
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- 说明书主体内容区（保留原有main-layout和目录结构） -->
         <div class="main-layout container mx-auto px-2 sm:px-6 py-8 flex flex-row relative">
             <!-- 桌面端左侧固定目录（sticky） -->
             <div class="toc-float" style="background:none;border:none;box-shadow:none;padding:0;margin-bottom:32px;">
+                <!-- 搜索框 -->
+                <div class="search-container" style="margin-bottom: 20px;">
+                    <div class="search-input-group" style="position: relative; display: flex; align-items: center;">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            placeholder="搜索说明书内容..." 
+                            style="width: 100%; padding: 10px 40px 10px 12px; border: 2px solid var(--border-color); border-radius: 6px; background: var(--input-bg); color: var(--text-color); font-size: 14px; outline: none; transition: border-color 0.2s;"
+                        >
+                        <i class="fa fa-search" style="position: absolute; right: 12px; color: #888; font-size: 16px; pointer-events: none;"></i>
+                        <button 
+                            id="clear-search" 
+                            style="position: absolute; right: 36px; background: none; border: none; color: #888; font-size: 14px; cursor: pointer; display: none; padding: 4px; border-radius: 4px; transition: color 0.2s;"
+                            title="清除搜索"
+                        >
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="search-results" style="margin-top: 8px; font-size: 12px; color: #666; max-height: 400px; overflow-y: auto; border-radius: 4px;"></div>
+                </div>
+                
                 <h2 class="text-xl sm:text-2xl font-bold mb-4 tracking-wide" style="color:var(--text-color);background:none;border:none;">目录</h2>
                 <ul class="grid grid-cols-2 sm:grid-cols-1 gap-x-4 gap-y-2 text-base" style="background:none;border:none;">
                     <li class="mb-2"><a id="toc-intro" href="#intro" class="hover:underline font-semibold py-1 inline-block" style="background:none;">游戏背景</a></li>
@@ -411,7 +592,7 @@
                         <div class="w-full md:h-full">
                             <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-stack-line mr-2"></i>卡牌构成</h2>
                             <ul class="list-disc pl-6 mb-4" style="line-height: auto; ">
-                                <li>职业牌：15张</li>
+                                <li>角色牌：15张</li>
                                 <li>先行令：1张</li>
                                 <li>鉴定牌：10张</li>
                                 <li>稽查牌：10张</li>
@@ -462,7 +643,7 @@
                             <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-settings-3-line mr-2"></i>游戏初期设置</h2>
                             <ol class="list-decimal pl-6 mb-4" style="line-height: 1.5; margin-bottom: 1.5em;">
                                 <li style="margin-bottom: 1em;">将所有古物牌与工具牌洗混后大致平分为两叠牌，一叠作为市场牌，另一叠为古墓牌。</li>
-                                <li style="margin-bottom: 1em;">将先行令与场上玩家数量-1张职业牌洗混后供玩家抽取。抽到先行令的作为本局的首位玩家，然后该玩家再从剩余职业牌中抽取一张本局游戏使用的职业牌。例如：有4名玩家，则抽取先行令和3张职业牌。</li>
+                                <li style="margin-bottom: 1em;">将先行令与场上玩家数量-1张角色牌洗混后供玩家抽取。抽到先行令的作为本局的首位玩家，然后该玩家再从剩余角色牌中抽取一张本局游戏使用的角色牌。例如：有4名玩家，则抽取先行令和3张角色牌。</li>
                                 <li style="margin-bottom: 1em;">政策牌和鉴定牌洗混后无需操作，放置一旁。</li>
                             </ol>
                         </div>
@@ -504,7 +685,7 @@
                             <strong>政策阶段</strong>：所有玩家回合结束后，翻开并执行本轮政策牌（若无则跳过）。
                         </li>
                         <li>
-                            <strong>拍卖阶段</strong>：结算政策牌后，将拍卖行内的牌依次拍卖直至清空。
+                            <strong>拍卖阶段</strong>：结算政策牌后，将拍卖行内的牌依次拍卖直至清空（若无则跳过）。
                         </li>
                         <li>
                             <strong>检查阶段</strong>：若公示区古物牌数量大于7，则下轮开始时抽取一张政策牌。
@@ -517,7 +698,7 @@
                 <section id="features" class="rounded-2xl shadow p-6 mb-10 card-hover ring-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
                     <h2 class="text-2xl font-bold mb-3" style="color:var(--text-color);"><i class="ri-star-line mr-2"></i>游戏特色</h2>
                     <ul class="list-disc pl-6 mb-4 space-y-3">
-                        <li><strong>探秘古墓</strong>：消耗一定的行动点数，以此进入古墓获取真品古物。</li>
+                        <li><strong>探秘古墓</strong>：消耗一定的行动力，以此进入古墓获取真品古物。</li>
                         <li><strong>市场淘宝</strong>：市场中会有源源不断的机会获得古物，但其中不乏赝品；需要鉴定后方知真伪。</li>
                         <li><strong>鉴定古物</strong>：进入鉴定机构并将手中的古物牌鉴定成功后就可以使用它们独特的能力了。</li>
                         <li><strong>收集、组合、排序</strong>：通过收集不同的古物，来解锁搭配不同的技能，若使同类型古物排列得当，则会更轻易获得胜利，你能否找寻出当下古物排列组合的最优解呢？</li>
@@ -577,7 +758,7 @@
 
                     <ol class="list-decimal pl-6 mb-8" style="line-height: 2;">
                         <li>公示区内的每张古物牌的基础积分为1。</li>
-                        <li>计算时先基础分，再组别分，最后技能分。</li>
+                        <li>计算时先基础分，再技能分，最后组别分。</li>
                         <li>若有连续三张古物牌类别形成拼接，则归为一组，每组积分+1。</li>
                         <li>已被归类的古物牌不可再次被归类。</li>
                         <li>积分结算时应当从左至右依次结算每一个古物，而非同时计算。</li>
@@ -605,7 +786,7 @@
                         <!-- 左侧文字说明 -->
                         <li class="example mt-0 p-4 rounded-lg border flex-1" style="background:var(--panel-bg);color:var(--text-color);border-color:var(--border-color);">
                             <p><strong>积分结算举例</strong>：</p>
-                            <p>从左至右依次加减乘除每一个古物，结算时先基础分，再组别分，最后技能分。</p>
+                            <p>从左至右依次加减乘除每一个古物，结算时先基础分，再技能分，最后组别分。</p>
                             <p>图一：有古物【剪刀】，触发剪刀技能，因为从左到右结算，所以剪刀前的古物（包括剪刀自己）的分数*2。</p>
                             <p>图一：有古物【八卦镜】，触发八卦镜技能，所有古物基础分+1。</p>
                         </li>
@@ -630,8 +811,8 @@
                         <li><span class="font-semibold text-blue-600">置入状态</span>：即正置与倒置两种情况。</li>
                         <li><span class="font-semibold text-blue-600">翻面</span>：将卡牌背朝上放置。</li>
                         <li><span class="font-semibold text-blue-600">使用</span>：触发卡牌技能效果，然后置入回收站。</li>
-                        <li><span class="font-semibold text-blue-600">鉴定</span>：向所有玩家展示需要鉴定的古物，然后抽取两张鉴定牌并对照翻开的鉴定牌词条，该过程中可使用工具牌或其他古物效果协助以满足词条条件，若词条均满足则鉴定成功，将展示的古物牌正置于公示区；反之无事发生。</li>
-                        <li><span class="font-semibold text-blue-600">限定效果</span>：古物技能的附带效果，使用此技能效果后，失去此技能，直到该古物重新进入公示区后恢复。</li>
+                        <li><span class="font-semibold text-blue-600">鉴定</span>：向所有玩家展示需要鉴定的古物，然后抽取1张鉴定牌并对照翻开的鉴定牌词条，该过程中可使用工具牌或其他古物效果协助以满足词条条件，若词条均满足则鉴定成功，将展示的古物牌正置于公示区；反之鉴定失败，收回古物牌。</li>
+                        <li><span class="font-semibold text-blue-600">限定</span>：古物技能的附带效果，使用此技能效果后，失去此技能，直到该古物重新进入公示区后恢复。</li>
                         <li><span class="font-semibold text-blue-600">固定</span>：古物牌无法离开带有固定效果的公示区。</li>
                     </ul>
                 </section>
@@ -642,43 +823,43 @@
                         <li>
                             <strong>【市场】（牌堆1）</strong>：
                             <ul class="list-disc pl-6 mb-8">
-                                <li>每回合只可进入一次</li>
-                                <li>进入市场后，单独观看牌堆顶上的三张牌，然后选择一张收入手牌，其余牌置入回收站</li>
-                                <li>一轮过程中，市场无牌后不立即补充，而是在下一轮开始时将回收站洗牌转入市场</li>
+                                <li>每回合只可进入一次。</li>
+                                <li>观看市场牌堆顶上的三张牌，选择获得一张牌，可额外消耗行动力选择获得对应数量的其余牌，若有剩余牌则置入回收站。</li>
+                                <li>一轮过程中，市场无牌后不立即补充，而是在下一轮开始时将回收站洗牌转入市场。</li>
                             </ul>
 
                         </li>
                         <li>
                             <strong>【古墓】（牌堆2）</strong>：
                             <ul class="list-disc pl-6 mb-8">
-                                <li>每回合只可进入一次</li>
-                                <li>需要消耗3行动点数可进入古墓</li>
+                                <li>每回合只可进入一次。</li>
+                                <li>需要消耗3行动力可进入古墓。</li>
                                 <li>进入古墓后，翻开古墓牌堆顶上的两张牌并选择一张牌，根据选择结果，若为：古物牌-立即倒置于公示区最右侧，不为古物牌-收入手牌；其余的牌均置入回收站。</li>
                                 <li>进入古墓后若同时获得多张古物牌，则玩家自定先后顺序置入公示区。</li>
-                                <li>若本轮没有人进入古墓，则将古墓顶上的一张牌翻开并置入回收站</li>
+                                <li>若本轮没有人进入古墓，则将古墓顶上的一张牌翻开并置入回收站。</li>
                                 <li>该区域无法通过任何手段增加牌堆数量，用完即止。</li>
                             </ul>
                         </li>
                         <li>
                             <strong>【回收站】（弃牌堆）</strong>：
                             <ul class="list-disc pl-6 mb-8">
-                                <li>所有使用过的工具牌及被弃置的牌都需要置入回收站</li>
+                                <li>所有使用过的工具牌及被弃置的牌都需要置入回收站。</li>
                                 <li>当市场无牌后，下一轮开始时将回收站内的所有牌洗牌后重新转入市场。</li>
                             </ul>
                         </li>
                         <li>
                             <strong>【鉴定机构】</strong>：（使古物卡激活技能并置入公示区）
                             <ul class="list-disc pl-6 mb-8">
-                                <li>从手牌中展示一张古物牌，并抽取一张鉴定牌，展示的古物牌需满足鉴定牌上的所有词条方为鉴定成功；否则无事发生。</li>
-                                <li>鉴定成功后的古物牌需立即置入公示区的最右侧</li>
+                                <li>向所有玩家展示需要鉴定的古物，然后抽取1张鉴定牌并对照翻开的鉴定牌词条，该过程中可使用工具牌或其他古物效果协助以满足词条条件，若词条均满足则鉴定成功，将展示的古物牌正置于公示区；反之鉴定失败，收回古物牌。</li>
+                                <li>鉴定成功后的古物牌需立即置入公示区的最右侧。</li>
                             </ul>
                         </li>
                         <li>
                             <strong>【政策卡】</strong>：（随机的奖惩结算）
                             <ul class="list-disc pl-6 mb-8">
-                                <li>本轮结束时若有玩家的公示区内古物牌数量>6，则下一轮开始前抽取一张政策牌，背面朝上置于一旁</li>
-                                <li>本轮最后一名玩家回合结束后，向所有玩家展示之前抽取的政策牌，并执行牌面上的奖惩内容</li>
-                                <li>结算后所有政策牌洗混归置一旁</li>
+                                <li>本轮结束时若有玩家的公示区内古物牌数量大于7，则下一轮开始前抽取一张政策牌，背面朝上置于一旁。</li>
+                                <li>本轮最后一名玩家回合结束后，向所有玩家展示之前抽取的政策牌，并执行牌面上的奖惩内容。</li>
+                                <li>结算后所有政策牌洗混放回原位。</li>
                             </ul>
                         </li>
                         <li>
@@ -687,9 +868,9 @@
                                 <li>在拍卖行内的所有牌统一在拍卖阶段拍卖。</li>
                                 <li>由本轮末位玩家开始首位玩家结束的顺序依次出价，出价最高者成交。</li>
                                 <li>竞拍出价时必须比上一位玩家的价值更高，相同价格不能出价。</li>
-                                <li>拍卖时需依次对每一张卡牌单独进行竞拍，直到所有牌成交或流拍</li>
-                                <li>若成交为古物卡，将其正置入公示区最右侧；若不为古物卡，则收入手牌。</li>
-                                <li>若有卡牌未成交导致流拍，则转入回收站</li>
+                                <li>拍卖时需依次对每一张卡牌单独进行竞拍，直到所有牌成交或流拍。</li>
+                                <li>若成交为古物卡，将其立即正置入公示区最右侧；若不为古物卡，则立即收入手牌。</li>
+                                <li>若有卡牌未成交导致流拍，则转入回收站。</li>
                             </ul>
                         </li>
                     </ol>
@@ -700,19 +881,19 @@
                             <strong>【公示区】</strong>：（最终积分结算区域）
                             <ul class="list-disc pl-6 mb-8">
                                 <li>位于玩家面前的区域，玩家需将收集到的古物卡按条件放置于公示区内才可获得相应积分并取得胜利。</li>
-                                <li>手牌中的古物卡需进行鉴定后方可置入公示区</li>
-                                <li>置入公示区内的古物可以在激活阶段以从左至右的顺序依次生效/使用其卡面技能效果</li>
-                                <li>注：古物被动效果可同时生效，但结算顺序仍为从左至右（即公示区内12345排列的古物中，1使数值加一，2使得数值翻倍，应当先加一后翻倍）</li>
+                                <li>手牌中的古物卡需进行鉴定后方可置入公示区。</li>
+                                <li>置入公示区内的古物可以在激活阶段以从左至右的顺序依次生效/使用其卡面技能效果。</li>
+                                <li>注：古物被动效果可同时生效，但结算顺序仍为从左至右（即公示区内12345排列的古物中，1使数值加一，2使得数值翻倍，应当先加一后翻倍）。</li>
                                 <li>本轮位次发生变动的古物技能效果失效（需将失效古物翻过来，卡背朝上作为标记，于下轮开始时所有玩家统一翻回来）。</li>
                                 <li>例A：12345排列的古物中，1移动至5右侧，转变为23451，导致所有古物位置发生变动，所以12345古物均失效一轮。</li>
-                                <li>例B：12345排列的古物中，1与5对调位置。转变为52341，其中234位置没有发生变动，所以仍可生效，而15变动位置所以失效一轮）</li>
+                                <li>例B：12345排列的古物中，1与5对调位置。转变为52341，其中234位置没有发生变动，所以仍可生效，而15变动位置所以失效一轮）。</li>
                             </ul>
                         </li>
                         <li>
                             <strong>【手牌区】</strong>：（个人基础存储区域）
                             <ul class="list-disc pl-6 mb-8">
-                                <li>每位玩家在个人回合结束后，留存至多6张手牌</li>
-                                <li>以任何方式进入手牌区内的古物卡，其鉴定状态均转变为'未鉴定'状态</li>
+                                <li>每位玩家在个人回合结束后，留存至多6张手牌。</li>
+                                <li>以任何方式进入手牌区内的古物卡，其鉴定状态均转变为'未鉴定'状态。</li>
                             </ul>
                         </li>
                     </ol>
@@ -756,7 +937,7 @@
                     <div class="footer_inner" style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 0 4px 0; color: #fff; font-size: 15px;">
                         <span>古物帮©2025</span>
                         <span style="color: #888;">|</span>
-                        <span>策划&设计：啊层</span>
+                        <span>策划&设计：啊层（联系方式：2464823116@qq.com）</span>
                         <span style="color: #888;">|</span>
                         <span>美术&程序：psdoc烛光</span>
                     </div>
@@ -1196,6 +1377,461 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // ================== 搜索功能 ==================
+    const searchInput = document.getElementById('search-input');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchResults = document.getElementById('search-results');
+    let searchTimeout;
+
+    // 目录名称映射表
+    const sectionNames = {
+        'intro': '游戏背景',
+        'accessories': '卡牌构成',
+        'setup': '游戏初期设置',
+        'flow': '游戏流程',
+        'features': '游戏特色',
+        'end': '游戏结束条件',
+        'artifacts': '古物牌种类',
+        'scoring': '积分结算规则',
+        'terms': '名词解释',
+        'areas': '区域说明',
+        'faq': '常见问题与解答'
+    };
+
+    // 获取元素所在的目录名称
+    function getSectionName(element) {
+        // 向上查找最近的section元素
+        let section = element.closest('section');
+        if (section && section.id) {
+            return sectionNames[section.id] || section.id;
+        }
+        
+        // 如果没找到section，尝试查找其他可能的父级容器
+        let container = element.closest('[id]');
+        if (container && container.id) {
+            return sectionNames[container.id] || container.id;
+        }
+        
+        return '其他';
+    }
+
+    // 搜索功能
+    function performSearch(query) {
+        if (!query.trim()) {
+            clearSearchResults();
+            return;
+        }
+
+        const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, span, div');
+        const results = [];
+        const queryLower = query.toLowerCase();
+
+        searchableElements.forEach((element, index) => {
+            const text = element.textContent || element.innerText;
+            if (text.toLowerCase().includes(queryLower)) {
+                // 排除一些不需要搜索的元素
+                if (element.closest('.search-container') || 
+                    element.closest('.kobe_topbar') || 
+                    element.closest('.toc-float') ||
+                    element.closest('.toc-drawer') ||
+                    element.classList.contains('fa') ||
+                    element.classList.contains('ri')) {
+                    return;
+                }
+
+                // 获取元素的可见文本（去除HTML标签）
+                const visibleText = element.textContent.trim();
+                if (visibleText.length > 0 && visibleText.length < 200) {
+                    results.push({
+                        element: element,
+                        text: visibleText,
+                        index: index
+                    });
+                }
+            }
+        });
+
+        displaySearchResults(results, query);
+    }
+
+    // 显示搜索结果
+    function displaySearchResults(results, query) {
+        if (results.length === 0) {
+            searchResults.innerHTML = '<span style="color: #999;">未找到相关内容</span>';
+            return;
+        }
+
+        let resultsHtml = `<span style="color: #666;">找到 ${results.length} 个结果：</span><br>`;
+        
+        results.forEach((result, index) => {
+            const highlightedText = result.text.replace(
+                new RegExp(query, 'gi'), 
+                match => `<mark style="background: #ffeb3b; color: #000; padding: 0 2px; border-radius: 2px;">${match}</mark>`
+            );
+            
+            const elementId = result.element.id || 'element-' + result.index;
+            const sectionName = getSectionName(result.element);
+            
+            resultsHtml += `
+                <div style="margin: 8px 0; padding: 8px; background: var(--panel-bg); border-radius: 4px; cursor: pointer; border-left: 3px solid #3B82F6; transition: transform 0.2s;" 
+                     onclick="window.scrollToElement('${elementId}')"
+                     onmouseover="this.style.transform='translateX(4px)'" 
+                     onmouseout="this.style.transform='translateX(0)'">
+                    <div style="font-size: 13px; color: #666; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>${sectionName}</span>
+                        <span style="background: #3B82F6; color: white; padding: 2px 6px; border-radius: 4px; font-size: 11px;">${index + 1}</span>
+                    </div>
+                    <div style="font-size: 14px; line-height: 1.4;">
+                        ${highlightedText}
+                    </div>
+                </div>
+            `;
+        });
+
+        searchResults.innerHTML = resultsHtml;
+    }
+
+    // 清除搜索结果
+    function clearSearchResults() {
+        searchResults.innerHTML = '';
+        // 移除所有高亮
+        document.querySelectorAll('mark').forEach(mark => {
+            const parent = mark.parentNode;
+            parent.replaceChild(document.createTextNode(mark.textContent), mark);
+            parent.normalize();
+        });
+    }
+
+    // 滚动到指定元素
+    window.scrollToElement = function(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            // 考虑顶部导航栏的高度，调整滚动位置
+            const topBarHeight = 122;
+            const elementTop = element.offsetTop - topBarHeight - 20;
+            
+            window.scrollTo({
+                top: elementTop,
+                behavior: 'smooth'
+            });
+            
+            // 添加临时高亮效果
+            element.style.transition = 'background-color 0.3s';
+            element.style.backgroundColor = '#ffeb3b';
+            setTimeout(() => {
+                element.style.backgroundColor = '';
+            }, 2000);
+        }
+    }
+
+    // 搜索输入事件
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        
+        // 清除之前的定时器
+        clearTimeout(searchTimeout);
+        
+        // 显示/隐藏清除按钮
+        clearSearchBtn.style.display = query ? 'block' : 'none';
+        
+        // 延迟搜索，避免频繁触发
+        searchTimeout = setTimeout(() => {
+            performSearch(query);
+        }, 300);
+    });
+
+    // 清除搜索
+    clearSearchBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        clearSearchResults();
+        this.style.display = 'none';
+        searchInput.focus();
+    });
+
+    // 搜索框焦点事件
+    searchInput.addEventListener('focus', function() {
+        this.style.borderColor = '#3B82F6';
+    });
+
+    searchInput.addEventListener('blur', function() {
+        this.style.borderColor = 'var(--border-color)';
+    });
+
+    // 键盘快捷键
+    document.addEventListener('keydown', function(e) {
+        // Ctrl+F 或 Cmd+F 聚焦搜索框
+        if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+        }
+        
+        // ESC 清除搜索
+        if (e.key === 'Escape' && searchInput.value) {
+            searchInput.value = '';
+            clearSearchResults();
+            clearSearchBtn.style.display = 'none';
+        }
+    });
+
+    // 为没有ID的元素添加临时ID
+    function addIdsToElements() {
+        let tempIdCounter = 0;
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, span, div').forEach(element => {
+            if (!element.id && !element.closest('.search-container') && !element.closest('.kobe_topbar')) {
+                element.id = 'element-' + tempIdCounter++;
+            }
+        });
+    }
+    
+    // 页面加载完成后添加ID
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addIdsToElements);
+    } else {
+        addIdsToElements();
+    }
+
+    // ================== 移动端目录功能 ==================
+    const mobileTocToggle = document.getElementById('mobile-toc-toggle');
+    const mobileTocDrawer = document.getElementById('mobile-toc-drawer');
+    const mobileTocClose = document.getElementById('mobile-toc-close');
+    const mobileTocBackdrop = document.getElementById('mobile-toc-backdrop');
+    const mobileSearchBtn = document.getElementById('mobile-search-btn');
+    const mobileSearchModal = document.getElementById('mobile-search-modal');
+    const mobileSearchClose = document.getElementById('mobile-search-close');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const mobileSearchResults = document.getElementById('mobile-search-results');
+    let mobileSearchTimeout;
+
+    // 打开移动端目录
+    function openMobileToc() {
+        mobileTocDrawer.style.transform = 'translateX(0)';
+        mobileTocBackdrop.style.display = 'block';
+        setTimeout(() => {
+            mobileTocBackdrop.style.opacity = '1';
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭移动端目录
+    function closeMobileToc() {
+        mobileTocDrawer.style.transform = 'translateX(-100%)';
+        mobileTocBackdrop.style.opacity = '0';
+        setTimeout(() => {
+            mobileTocBackdrop.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+    }
+
+    // 打开移动端搜索模态框
+    function openMobileSearchModal() {
+        mobileSearchModal.style.display = 'block';
+        setTimeout(() => {
+            mobileSearchModal.style.opacity = '1';
+        }, 10);
+        document.body.style.overflow = 'hidden';
+        mobileSearchInput.focus();
+    }
+
+    // 关闭移动端搜索模态框
+    function closeMobileSearchModal() {
+        mobileSearchModal.style.opacity = '0';
+        setTimeout(() => {
+            mobileSearchModal.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = '';
+    }
+
+    // 移动端搜索功能
+    function performMobileSearch(query) {
+        if (!query.trim()) {
+            mobileSearchResults.innerHTML = '';
+            return;
+        }
+
+        const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, span, div');
+        const results = [];
+        const queryLower = query.toLowerCase();
+
+        searchableElements.forEach((element, index) => {
+            const text = element.textContent || element.innerText;
+            if (text.toLowerCase().includes(queryLower)) {
+                if (element.closest('.search-container') || 
+                    element.closest('.kobe_topbar') || 
+                    element.closest('.toc-float') ||
+                    element.closest('.mobile-toc-drawer') ||
+                    element.classList.contains('fa') ||
+                    element.classList.contains('ri')) {
+                    return;
+                }
+
+                const visibleText = element.textContent.trim();
+                if (visibleText.length > 0 && visibleText.length < 150) {
+                    results.push({
+                        element: element,
+                        text: visibleText,
+                        index: index
+                    });
+                }
+            }
+        });
+
+        displayMobileSearchResults(results, query);
+    }
+
+    // 显示移动端搜索结果
+    function displayMobileSearchResults(results, query) {
+        if (results.length === 0) {
+            mobileSearchResults.innerHTML = '<div style="text-align: center; color: #999; font-size: 16px; padding: 40px 20px;">未找到相关内容</div>';
+            return;
+        }
+
+        let resultsHtml = `<div style="color: #666; font-size: 14px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);">找到 ${results.length} 个结果：</div>`;
+        
+        results.forEach((result, index) => {
+            const highlightedText = result.text.replace(
+                new RegExp(query, 'gi'), 
+                match => `<mark style="background: #ffeb3b; color: #000; padding: 0 2px; border-radius: 2px;">${match}</mark>`
+            );
+            
+            const elementId = result.element.id || 'element-' + result.index;
+            const sectionName = getSectionName(result.element);
+            
+            resultsHtml += `
+                <div style="margin: 12px 0; padding: 12px; background: var(--bg-color); border-radius: 8px; cursor: pointer; border-left: 4px solid #3B82F6; transition: transform 0.2s;" 
+                     onclick="handleMobileSearchResultClick('${elementId}')"
+                     onmouseover="this.style.transform='translateX(4px)'" 
+                     onmouseout="this.style.transform='translateX(0)'">
+                    <div style="font-size: 12px; color: #666; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>${sectionName}</span>
+                        <span style="background: #3B82F6; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px;">${index + 1}</span>
+                    </div>
+                    <div style="font-size: 14px; line-height: 1.4; color: var(--text-color);">
+                        ${highlightedText}
+                    </div>
+                </div>
+            `;
+        });
+
+        mobileSearchResults.innerHTML = resultsHtml;
+    }
+
+    // 清除移动端搜索结果
+    function clearMobileSearchResults() {
+        mobileSearchResults.innerHTML = '';
+    }
+
+    // 绑定移动端目录事件
+    mobileTocToggle.addEventListener('click', openMobileToc);
+    mobileTocClose.addEventListener('click', closeMobileToc);
+    mobileTocBackdrop.addEventListener('click', closeMobileToc);
+
+    // 绑定移动端搜索事件
+    mobileSearchBtn.addEventListener('click', openMobileSearchModal);
+    mobileSearchClose.addEventListener('click', closeMobileSearchModal);
+    mobileSearchModal.addEventListener('click', function(e) {
+        if (e.target === mobileSearchModal) {
+            closeMobileSearchModal();
+        }
+    });
+
+    // 移动端搜索输入事件
+    mobileSearchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        
+        clearTimeout(mobileSearchTimeout);
+        
+        mobileSearchTimeout = setTimeout(() => {
+            performMobileSearch(query);
+        }, 300);
+    });
+
+    // 移动端搜索框焦点事件
+    mobileSearchInput.addEventListener('focus', function() {
+        this.style.borderColor = '#3B82F6';
+    });
+
+    mobileSearchInput.addEventListener('blur', function() {
+        this.style.borderColor = 'var(--border-color)';
+    });
+
+    // 移动端目录链接点击事件
+    document.querySelectorAll('.mobile-toc-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const targetElement = document.querySelector(href);
+            
+            if (targetElement) {
+                closeMobileToc();
+                setTimeout(() => {
+                    const topBarHeight = 122;
+                    const elementTop = targetElement.offsetTop - topBarHeight - 20;
+                    
+                    window.scrollTo({
+                        top: elementTop,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 添加临时高亮效果
+                    targetElement.style.transition = 'background-color 0.3s';
+                    targetElement.style.backgroundColor = '#ffeb3b';
+                    setTimeout(() => {
+                        targetElement.style.backgroundColor = '';
+                    }, 2000);
+                }, 350);
+            }
+        });
+    });
+
+    // 处理移动端搜索结果点击
+    window.handleMobileSearchResultClick = function(elementId) {
+        console.log('移动端搜索结果点击:', elementId);
+        
+        // 关闭搜索模态框
+        closeMobileSearchModal();
+        
+        // 延迟执行滚动，确保模态框关闭动画完成
+        setTimeout(() => {
+            const element = document.getElementById(elementId);
+            console.log('找到元素:', element);
+            
+            if (element) {
+                // 考虑顶部导航栏的高度，调整滚动位置
+                const topBarHeight = 122;
+                const elementTop = element.offsetTop - topBarHeight - 20;
+                
+                console.log('滚动到位置:', elementTop);
+                
+                window.scrollTo({
+                    top: elementTop,
+                    behavior: 'smooth'
+                });
+                
+                // 添加临时高亮效果
+                element.style.transition = 'background-color 0.3s';
+                element.style.backgroundColor = '#ffeb3b';
+                setTimeout(() => {
+                    element.style.backgroundColor = '';
+                }, 2000);
+            } else {
+                console.log('未找到元素:', elementId);
+            }
+        }, 350);
+    };
+
+    // ESC键关闭移动端目录和搜索模态框
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (mobileTocDrawer.style.transform === 'translateX(0px)') {
+                closeMobileToc();
+            }
+            if (mobileSearchModal.style.display === 'block') {
+                closeMobileSearchModal();
+            }
+        }
+    });
 });
 </script>
 </body>
